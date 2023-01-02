@@ -1,6 +1,5 @@
 # Koło fortuny - Losowanie osób do różnych celów
 
-
 ## Krótki opis
 
 Projekt ma na celu ułatwienie podejmowania decyzji w sytuacjach spornych, czyli W momencie w którym nie ma chętnych do wykonania pewnej czynności, bądź jest potrzebny czynnik losowy itp. 
