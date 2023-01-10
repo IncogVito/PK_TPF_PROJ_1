@@ -1,0 +1,5 @@
+:host {
+  height: 5rem;
+  display: block;
+  background-color: var(--background-primary-color);
+}
