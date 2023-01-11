@@ -1,0 +1,7 @@
+<mat-form-field>
+    <mat-label>Joining Code</mat-label>
+    <input matInput type="text" [(ngModel)]="codeInputValue">
+    <button *ngIf="codeInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="codeInputValue=''">
+      <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
