@@ -1,0 +1,16 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__tile {
+    display: block;
+    width: 80vw;
+    margin-top: 2rem;
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+}

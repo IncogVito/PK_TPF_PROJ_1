@@ -1,1 +1,14 @@
-<p>main-page works!</p>
+<section class="main-page">
+
+  <app-tile-primary class="main-page__tile"
+                    text="Dołącz do losowania"
+                    routerLink="join"
+  >
+  </app-tile-primary>
+
+  <app-tile-primary class="main-page__tile"
+                    [disabled]="true"
+                    text="Stwórz nowe koło fortuny">
+  </app-tile-primary>
+
+</section>

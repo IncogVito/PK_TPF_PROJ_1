@@ -1,0 +1,40 @@
+:host {
+  height: 4rem;
+  display: block;
+}
+
+.toolbar {
+  background-color: var(--header-background-color--primary-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  &__user-profile {
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & mat-icon {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+
+  &__menu {
+    color: var(--header-text-on-color--primary-dark);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & mat-icon {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+}

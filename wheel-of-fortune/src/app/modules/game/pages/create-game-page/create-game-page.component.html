@@ -1,1 +1,23 @@
-<p>create-game-page works!</p>
+<section class="create-game page-content">
+  <h2>
+    Tworzenie nowego koła
+  </h2>
+
+  <mat-form-field class="create-game__form"
+                  appearance="outline">
+    <mat-label>Wprowadź nazwę koła</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+  <mat-radio-group class="d-flex flex-column align-start">
+    <mat-radio-button value="1">Losowanie pojedyńczej osoby</mat-radio-button>
+    <mat-radio-button value="2">Losowanie listy osób</mat-radio-button>
+  </mat-radio-group>
+
+  <button class="u-full-width u-mt-2"
+          color="custom-button-primary"
+          mat-button>
+    Utwórz
+  </button>
+
+</section>

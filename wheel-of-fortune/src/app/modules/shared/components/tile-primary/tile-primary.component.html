@@ -1,1 +1,13 @@
-<p>tile-primary works!</p>
+<div class="tile-primary"
+     [class.tile-primary--disabled]="disabled"
+>
+
+  <mat-icon class="tile-primary__icon">
+    {{icon}}
+  </mat-icon>
+
+  <span class="tile-primary__text">
+    {{text}}
+  </span>
+
+</div>

@@ -1,0 +1,20 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--background-color--primary-dark);
+}
+
+.mat-body,
+body.mat-typography,
+.mat-typography h2 {
+  font-family: 'Nunito', sans-serif;
+  color: white;
+}
+
+.page-content {
+  padding: 1rem;
+}
