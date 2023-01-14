@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-game-page',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class CreateGamePageComponent {
 
+  public createFameForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      type: new FormControl(1, Validators.required),
+      singleGameTime: new FormControl(5)
+    }
+  )
+
 }
+

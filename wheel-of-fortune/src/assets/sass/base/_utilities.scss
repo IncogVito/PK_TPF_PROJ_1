@@ -220,6 +220,7 @@
 .u-full-height {
   height: 100%
 }
+
 .u-height-0 {
   height: 0
 }
@@ -264,12 +265,13 @@
 }
 
 .d-block {
-  display: block;
+  display: block !important;
 }
 
 .align-center {
   align-items: center;
 }
+
 .align-self-center {
   align-self: center;
 }

@@ -15,10 +15,12 @@ import { CreateGamePageComponent } from './modules/game/pages/create-game-page/c
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from "./modules/shared/shared.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,10 @@ import {MatRadioModule} from "@angular/material/radio";
     FormsModule,
     SharedModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSliderModule,
+    ReactiveFormsModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
