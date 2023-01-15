@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './modules/core/header/header.component';
-import { FooterComponent } from './modules/core/footer/footer.component';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './modules/core/header/header.component';
+import {FooterComponent} from './modules/core/footer/footer.component';
 import {RouterOutlet} from "@angular/router";
-import { MainPageComponent } from './modules/game/pages/main-page/main-page.component';
+import {MainPageComponent} from './modules/game/pages/main-page/main-page.component';
 import {AppRoutingModule} from "./app-routing.module";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { GameWheelPageComponent } from './modules/game/pages/game-wheel-page/game-wheel-page.component';
-import { JoinGamePageComponent } from './modules/game/pages/join-game-page/join-game-page.component';
-import { CreateGamePageComponent } from './modules/game/pages/create-game-page/create-game-page.component';
+import {GameWheelPageComponent} from './modules/game/pages/game-wheel-page/game-wheel-page.component';
+import {JoinGamePageComponent} from './modules/game/pages/join-game-page/join-game-page.component';
+import {CreateGamePageComponent} from './modules/game/pages/create-game-page/create-game-page.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -21,6 +21,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatDividerModule} from "@angular/material/divider";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {environment} from "../environments/environment";
+import {AngularFireModule} from "@angular/fire/compat";
+import {NgxsModule} from "@ngxs/store";
+import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
 
 @NgModule({
   declarations: [
@@ -47,9 +53,15 @@ import {MatDividerModule} from "@angular/material/divider";
     MatRadioModule,
     MatSliderModule,
     ReactiveFormsModule,
-    MatDividerModule
+    MatDividerModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    NgxsModule.forRoot([], {developmentMode: !environment.production,}),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot({disabled: environment.production,})
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
