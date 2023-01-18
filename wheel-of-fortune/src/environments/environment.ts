@@ -23,5 +23,6 @@ const firebaseConfig = {
 
 export const environment = {
   production: false,
-  firebase: firebaseConfig
+  firebase: firebaseConfig,
+  emulator: true
 };
