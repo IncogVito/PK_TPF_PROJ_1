@@ -27,6 +27,7 @@ import {NgxsModule} from "@ngxs/store";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
 import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
+import {GameState} from "./modules/game/stores/game/game.state";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/f
     MatDividerModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    NgxsModule.forRoot([], {developmentMode: !environment.production,}),
+    NgxsModule.forRoot([
+      GameState
+    ], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,})
   ],

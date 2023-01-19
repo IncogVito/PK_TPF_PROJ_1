@@ -16,6 +16,13 @@ export class GameIntegrationService {
 
     doc.snapshotChanges()
       .pipe(take(5))
-      .subscribe(value => console.log('Value changed by firebase: ', value))
+      .subscribe(snapshot => {
+        if (snapshot.payload.exists) {
+          const data = snapshot.payload.data();
+          console.log(data);
+        } else {
+          console.log('No such document!');
+        }
+      });
   }
 }

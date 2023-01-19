@@ -1,10 +1,10 @@
 export interface GameModel {
   ownerId: string;
   type: 'single' | 'multiple'
-  creation_date: Date,
-  current_question: string,
+  creationDate: Date,
   participants: ParticipantModel[],
   joiningCode: string;
+  currentQuestion: string;
 }
 
 export interface ParticipantModel {
