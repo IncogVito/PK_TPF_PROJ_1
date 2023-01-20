@@ -1,9 +1,14 @@
 <mat-toolbar class="toolbar">
 
-  <div class="toolbar__user-profile">
-    <mat-icon>
-      account_circle
-    </mat-icon>
+  <div class="toolbar__user-profile" *ngIf="authState$ | async as authState">
+    <div class="toolbar__logged-user" *ngIf="authState.loggedIn; else logOutUser">
+      <img [src]="authState.loggedUser!.imageUrl" alt="User image"/>
+    </div>
+    <ng-template #logOutUser>
+      <mat-icon (click)="login()">
+        account_circle
+      </mat-icon>
+    </ng-template>
   </div>
 
   <button mat-icon-button class="toolbar__menu">
