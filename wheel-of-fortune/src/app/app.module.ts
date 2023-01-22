@@ -31,6 +31,7 @@ import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
 import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
 import {GameState} from "./modules/game/stores/game/game.state";
 import {AuthState} from "./modules/core/stores/auth/auth.state";
+import { WheelComponent } from './modules/game/wheel/wheel.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {AuthState} from "./modules/core/stores/auth/auth.state";
     GameWheelPageComponent,
     JoinGamePageComponent,
     CreateGamePageComponent,
+    WheelComponent
   ],
   imports: [
     BrowserModule,

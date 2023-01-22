@@ -24,7 +24,7 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-
+var TweenMax = require('./TweenMax.min.js')
 module.exports = Winwheel;
 
 // ====================================================================================================================
