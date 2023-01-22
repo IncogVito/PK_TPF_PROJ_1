@@ -27,6 +27,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {NgxsModule} from "@ngxs/store";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
+import {MatCard, MatCardModule} from '@angular/material/card'; 
+import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
     MainPageComponent,
     GameWheelPageComponent,
     JoinGamePageComponent,
-    CreateGamePageComponent
+    CreateGamePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,9 @@ import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
     AngularFireModule.initializeApp(environment.firebase),
     NgxsModule.forRoot([], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot({disabled: environment.production,})
+    NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

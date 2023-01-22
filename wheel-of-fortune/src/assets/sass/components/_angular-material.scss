@@ -1,98 +1,44 @@
-//.mat-focused .mat-form-field-label {
-//  /*change color of label*/
-//  color: white !important;
-//}
-//
-//.mat-form-field-underline {
-//  /*change color of underline*/
-//  background-color: white !important;
-//}
-//
-//.mat-form-field-ripple {
-//  /*change color of underline when focused*/
-//  background-color: white !important;
-//}
-//
-//
-.mdc-button.mat-custom-button-primary {
-  background-color: var(--button-background-color--primary-dark);
-  border-radius: 10px;
-  height: 2.5rem;
-}
+@use '@angular/material' as mat;
 
-.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
-  color: var(--tile-text-on-color--primary-dark);
-}
+@include mat.core();
 
-.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: rgba(172, 88, 241, 0.63);
-}
+@function modify-background($theme, $background-color) {
+  // Replace the background in the color object's background palette.
+  $theme-color: map-get($theme, color);
+  $color-background-palette: map-get($theme-color, background);
+  $color-background-palette: map-merge($color-background-palette, (background: $background-color));
+  $color-background-palette: map-merge($color-background-palette, (raised-button: $background-color));
+  $color-background-palette: map-merge($color-background-palette, (card: $background-color));
 
-.mat-form-field-appearance-outline .mdc-notched-outline > div {
-  border-color: rgba(172, 88, 241, 0.63) !important;
-  // opacity: 1!important;
-}
+  // Replace the background in the background palette.
+  $background-palette: map-get($theme, background);
+  $background-palette: map-merge($background-palette, (background: $background-color));
+  $background-palette: map-merge($background-palette, (raised-button: $background-color));
 
-.mat-mdc-radio-button .mdc-form-field {
-  color: rgba(172, 88, 241, 0.63);
-}
+  // Merge the changes into a new theme.
+  $modified-theme-color: map-merge($theme-color, (background: $color-background-palette));
+  $modified-theme: map-merge($theme, (color: $modified-theme-color));
+  $modified-theme: map-merge($modified-theme, (background: $background-palette));
 
-.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
-  border-color: rgba(172, 88, 241, 0.63) !important;
-}
+  @return $modified-theme;
+};
 
-.mat-divider {
-  border-color: rgba(172, 88, 241, 0.3);
-}
+$my-primary: mat.define-palette(mat.$deep-purple-palette);
+$my-accent: mat.define-palette(mat.$pink-palette);
 
-// TODO - pytanie czy chcemy się pierdzielić zthemowaniem przez angular materials.
-//@use '@angular/material' as mat;
-//
-//@include mat.core();
-//
-//$my-palette: (
-//  50: #e8eaf6,
-//  100: #c5cae9,
-//  200: #9fa8da,
-//  300: #7986cb,
-//  400: #992cee,
-//  500: #8300e2,
-//  600: #6f00dc,
-//  700: #5000d5,
-//  800: #2b05cd,
-//  900: #0010bf,
-//  contrast: (
-//    50: rgba(black, 0.87),
-//    100: rgba(black, 0.87),
-//    200: rgba(black, 0.87),
-//    300: white,
-//    400: white,
-//    500: white,
-//    600: white,
-//    700: white,
-//    800: white,
-//    900: white
-//  )
-//);
-//
-//$my-primary: mat.define-palette($my-palette, 500);
-//$my-accent: mat.define-palette($my-palette, 200, 100, 400);
-//
-//$my-theme: mat.define-light-theme((
-//  color: (
-//    primary: $my-primary,
-//    accent: $my-accent,
-//  ),
-//  typography: mat.define-typography-config(),
-//  density: 0,
-//));
-//
-//// Emit theme-dependent styles for common features used across multiple components.
-//@include mat.core-theme($my-theme);
-//
-//// Emit styles for MatButton based on `$my-theme`. Because the configuration
-//// passed to `define-light-theme` omits typography, `button-theme` will not
-//// emit any typography styles.
-//@include mat.all-component-colors($my-theme);
-//
-//// Include the theme mixins for other components you use here.
+$my-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+  )
+);
+
+$color-config:    mat.get-color-config($my-dark-theme);
+@include mat.all-component-themes(modify-background($my-dark-theme, hsl(249, 70%, 68%)));
+
+body {
+    background-color: #3c2647;
+    color: white;
+}

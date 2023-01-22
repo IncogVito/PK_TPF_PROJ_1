@@ -2,12 +2,14 @@
 
   <app-tile-primary class="main-page__tile"
                     text="Dołącz do losowania"
-                    routerLink="join"
+                    routerLink="/join"
+                    routerLinkActive="active"
+
   >
   </app-tile-primary>
 
   <app-tile-primary class="main-page__tile"
-                    [disabled]="true"
+                    [disabled]="false"
                     routerLink="create"
                     text="Stwórz nowe koło fortuny">
   </app-tile-primary>
