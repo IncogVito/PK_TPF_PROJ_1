@@ -21,7 +21,6 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatDividerModule} from "@angular/material/divider";
-import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
 import {NgxsModule} from "@ngxs/store";
@@ -29,6 +28,9 @@ import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
 import {MatCard, MatCardModule} from '@angular/material/card'; 
 import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
+import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
+import {GameState} from "./modules/game/stores/game/game.state";
+import {AuthState} from "./modules/core/stores/auth/auth.state";
 
 @NgModule({
   declarations: [
@@ -58,13 +60,23 @@ import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
     MatDividerModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    NgxsModule.forRoot([], {developmentMode: !environment.production,}),
+    NgxsModule.forRoot([
+      GameState,
+      AuthState
+    ], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
     MatCardModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: FIRESTORE_SETTINGS,
+      useValue: environment.emulator ? {
+        host: 'localhost:7200',
+        ssl: false
+      } : undefined
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

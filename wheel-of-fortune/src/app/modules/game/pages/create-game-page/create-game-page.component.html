@@ -1,4 +1,4 @@
-<section class="create-game page-content" [formGroup]="createFameForm">
+<section class="create-game page-content" [formGroup]="createGameForm">
   <h2>
     Tworzenie nowego koła
   </h2>
@@ -12,19 +12,22 @@
     <input matInput type="text"
            formControlName="name"
     >
+    <mat-error>
+      {{createGameForm.get('name')?.errors | extractErrors}}
+    </mat-error>
   </mat-form-field>
 
   <mat-radio-group class="d-flex flex-column align-start"
                    formControlName="type"
   >
-    <mat-radio-button [value]="1">Losowanie pojedyńczej osoby</mat-radio-button>
-    <mat-radio-button [value]="2">Losowanie listy osób</mat-radio-button>
+    <mat-radio-button value="single">Losowanie pojedyńczej osoby</mat-radio-button>
+    <mat-radio-button value="multiple">Losowanie listy osób</mat-radio-button>
   </mat-radio-group>
 
-  <ng-container *ngIf="createFameForm.get('type')?.value == 1">
+  <ng-container *ngIf="createGameForm.get('type')?.value == 'single'">
     <div class="example-label-container u-mt-1">
       <label id="example-name-label" class="example-name-label">Długość pojedyńczego losowania: </label>
-      <label class="example-value-label">{{createFameForm.get('singleGameTime')?.value}} sekund</label>
+      <label class="example-value-label">{{createGameForm.get('singleGameTime')?.value}} sekund</label>
     </div>
     <div class="u-full-width">
       <mat-slider
@@ -32,14 +35,16 @@
         [max]="10"
         [min]="5"
         [step]="1">
-        <input matSliderThumb formControlName="singleGameTime">
+        <input matSliderThumb formControlName="singleGameTime" type="number">
       </mat-slider>
     </div>
   </ng-container>
 
   <button class="u-full-width u-mt-2"
           color="accent"
-          mat-flat-button>
+          mat-flat-button
+          (click)="createGameForm.valid && createGame()"
+  >
     Utwórz
   </button>
 

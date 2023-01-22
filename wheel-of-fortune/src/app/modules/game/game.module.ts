@@ -14,4 +14,5 @@ import { WheelComponent } from './wheel/wheel.component';
     CommonModule
   ]
 })
-export class GameModule { }
+export class GameModule {
+}

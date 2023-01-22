@@ -9,7 +9,8 @@
   </app-tile-primary>
 
   <app-tile-primary class="main-page__tile"
-                    [disabled]="false"
+                    [disabled]="!(userLoggedIn$ | async)"
+                    [class.main-page__tile--disabled]="!(userLoggedIn$ | async)"
                     routerLink="create"
                     text="Stwórz nowe koło fortuny">
   </app-tile-primary>
