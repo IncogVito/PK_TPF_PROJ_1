@@ -30,7 +30,7 @@ Team leader po ostatecznym wybraniu składu zespołu zaprezentował jego wizje d
 ### Pierwsza ankieta 
 Pierwsza ankieta została przygotowana we współpracy całego zespołu. Znajdowały się w niej pytania z zakresu zainteresowania pomysłem aplikacji, jej użyteczności oraz potencjalnych zmian w pomyśle. Ankieta była dostępna w internecie i przez ten czas udało nam się zebrać informacje od osób różnych płci, w różnym wieku, z różnym wykształceniem (stopień oraz kierunek). Wyniki ankiety pomogły nam lekko zmienić zarys projektu, aby móc zrealizować projekt, który będzie bardziej odpowiadał użytkownikom.
 
-Wyniki pierwszej ankiety są dostępne w pliku Documents/survey_1.pdf
+Wyniki pierwszej ankiety są dostępne w pliku Documents/survey_1_results.pdf, natomiast jej treść jest dostępna w Documents/survey_1.pdf
 
 ### Przeprowadzenie wywiadu
 UX designer przeprowadził wywiad z team leaderem na temat ostatecznego kształtu projektu po przeanalizowaniu wyników z pierwszej ankiety. W wywiadzie zostały ustalone takie szczegóły jak funkcjonalności, sztat graficzna technologie itp.
