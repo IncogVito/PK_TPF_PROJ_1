@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthUtilService} from "../service/auth-util.service";
-import {EMPTY, Observable, take} from "rxjs";
+import {EMPTY, Observable} from "rxjs";
 import {Store} from "@ngxs/store";
 import {AuthActions} from "../stores/auth/auth.actions";
 import {AuthState} from "../stores/auth/auth.state";
@@ -26,5 +25,9 @@ export class HeaderComponent implements OnInit {
 
   login() {
     this.store.dispatch(new AuthActions.SignInUser());
+  }
+
+  logout() {
+    this.store.dispatch(new AuthActions.LogOutUser());
   }
 }

@@ -12,10 +12,24 @@
     text-align: center;
   }
 
-  &__form {
-    margin-top: 1rem;
-    width: 100%;
+  &__participants {
+    margin-right: .2rem;
+    display: flex;
+  }
 
-    color: white;
+  &__single-participant {
+    &:not(:last-child) {
+      margin-right: .2rem;
+    }
+
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    & > img {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
   }
 }

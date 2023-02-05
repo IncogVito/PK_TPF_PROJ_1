@@ -44,11 +44,21 @@ export class AuthState {
     const provider = new firebase.auth.GoogleAuthProvider();
     return fromPromise(this.afAuth.signInWithPopup(provider))
       .pipe(
-        tap(result => console.log(result)),
         map(userCredential => AuthUtilService.extractDataToLoggedUser(userCredential)),
         map(loggedUser => ctx.dispatch(new AuthActions.UserAuthenticated(loggedUser))
         )
       );
+  }
+
+  @Action(AuthActions.LogOutUser)
+  logOut(ctx: StateContext<AuthStateModel>, _: AuthActions.LogOutUser) {
+    return fromPromise(this.afAuth.signOut())
+      .pipe(
+        tap(() => ctx.setState({
+          loggedIn: false,
+          loggedUser: undefined
+        })),
+        map(() => ctx.dispatch(new AuthActions.UserNonAuthenticated())));
   }
 
   @Action(AuthActions.UserAuthenticated)

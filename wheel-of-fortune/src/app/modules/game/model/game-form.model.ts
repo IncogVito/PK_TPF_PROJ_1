@@ -3,3 +3,8 @@ export interface GameFormModel {
   type: 'single' | 'multiple',
   singleGameTime: number
 }
+
+export interface GameSearchModel {
+  gameId?: string,
+  joiningCode?: string
+}

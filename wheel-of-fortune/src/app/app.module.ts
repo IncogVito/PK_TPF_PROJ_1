@@ -26,11 +26,14 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {NgxsModule} from "@ngxs/store";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
-import {MatCard, MatCardModule} from '@angular/material/card'; 
+import {MatCard, MatCardModule} from '@angular/material/card';
 import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
 import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
 import {GameState} from "./modules/game/stores/game/game.state";
 import {AuthState} from "./modules/core/stores/auth/auth.state";
+import {MatMenuModule} from "@angular/material/menu";
+import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
+import {JoinGameState} from "./modules/game/stores/join-game/join-game.state";
 import { WheelComponent } from './modules/game/wheel/wheel.component';
 
 @NgModule({
@@ -64,10 +67,13 @@ import { WheelComponent } from './modules/game/wheel/wheel.component';
     AngularFireModule.initializeApp(environment.firebase),
     NgxsModule.forRoot([
       GameState,
-      AuthState
+      AuthState,
+      JoinGameState
     ], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
+    NgxsRouterPluginModule.forRoot(),
+    MatMenuModule,
     MatCardModule,
     MatGridListModule
   ],

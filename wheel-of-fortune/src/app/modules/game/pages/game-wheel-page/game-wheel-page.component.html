@@ -1,22 +1,38 @@
-<section class="game page-content">
-  <h2>
-    Plemienne koło
-  </h2>
+<section class="game page-content" *ngIf="gameState$ | async as gameState">
+  <ng-container *ngIf="gameState.game">
+    <h2>
+      {{gameState.game.name}}
+    </h2>
 
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-<!-- TODO <i>Tytuł losowania</i>-->
+    <h3>
+      {{gameState.game.currentQuestion}}
+    </h3>
 
-<!-- TODO KOŁO fortuny (jako osobny komponent powinno pójść, i jako argumenty zawierać liczbe części -->
-  <app-wheel></app-wheel>
-<!-- TODO Ilość osób co dołączyła -->
+    <!-- TODO <i>Tytuł losowania</i>-->
 
-<!-- TODO Kod dołączenia do skopiowania -->
+    <!-- TODO KOŁO fortuny (jako osobny komponent powinno pójść, i jako argumenty zawierać liczbe części -->
+    <app-wheel></app-wheel>
+    <!-- TODO Ilość osób co dołączyła -->
+    <mat-divider></mat-divider>
 
-  <button class="u-full-width u-mt-2"
-          color="accent"
-          mat-flat-button>
-    Utwórz
-  </button>
+    <div class="game__participants">
+      <div class="game__single-participant"
+           *ngFor="let singleParticipant of gameState.game.participants">
+        <img [src]="singleParticipant.photoUrl" alt="User image"/>
+      </div>
+    </div>
+
+
+    <!-- TODO Kod dołączenia do skopiowania -->
+
+    <button class="u-full-width u-mt-2"
+            color="accent"
+            mat-button>
+      Utwórz
+    </button>
+  </ng-container>
+
 
 </section>
