@@ -46,7 +46,7 @@ export class GameState {
   @Action(GameActions.LoadGameById)
   loadGameById(ctx: StateContext<GameStateModel>, action: GameActions.LoadGameById) {
     if (ctx.getState().fetched && ctx.getState().game && ctx.getState().game.id === action.payload.gameId) {
-      return;
+      return EMPTY;
     }
     ctx.patchState({
       fetched: false
