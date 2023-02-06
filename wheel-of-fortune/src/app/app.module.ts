@@ -35,6 +35,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
 import {JoinGameState} from "./modules/game/stores/join-game/join-game.state";
 import { WheelComponent } from './modules/game/wheel/wheel.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { WheelComponent } from './modules/game/wheel/wheel.component';
     NgxsRouterPluginModule.forRoot(),
     MatMenuModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     {

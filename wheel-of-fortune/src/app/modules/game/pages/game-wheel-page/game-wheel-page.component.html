@@ -13,7 +13,9 @@
     <!-- TODO <i>Tytuł losowania</i>-->
 
     <!-- TODO KOŁO fortuny (jako osobny komponent powinno pójść, i jako argumenty zawierać liczbe części -->
-    <app-wheel></app-wheel>
+    <app-wheel
+      [participants]="gameState.game.participants"
+    ></app-wheel>
     <!-- TODO Ilość osób co dołączyła -->
     <mat-divider></mat-divider>
 

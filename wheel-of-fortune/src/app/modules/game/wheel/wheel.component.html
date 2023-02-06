@@ -1,3 +1,11 @@
 <div class="wheelContainer" (click)="wheelClick()">
-    <canvas id="wheelCanvas" width="300" height="300" ></canvas>
+    <swal
+  #winnerSwal
+  title="Winner"
+  icon="question"
+  
+  (confirm)="resetWheel()">
+</swal>
+    <canvas id="pointerCanvas" width="{{width}}" height="{{pointerHeight}}" ></canvas>
+    <canvas id="wheelCanvas" width="{{width}}" height="{{height}}" ></canvas>
 </div>
