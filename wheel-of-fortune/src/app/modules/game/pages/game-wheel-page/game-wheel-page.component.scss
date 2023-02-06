@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
 }
-
 .game {
   width: 100vw;
   display: block;
@@ -10,6 +9,14 @@
   h2 {
     font-size: 1.5rem;
     text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  h3 {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 0;
   }
 
   &__participants {
@@ -21,15 +28,31 @@
     &:not(:last-child) {
       margin-right: .2rem;
     }
-
+    margin-top: 0.75rem;
     height: 2.5rem;
     width: 2.5rem;
     border-radius: 50%;
+    border: 2px solid white;
     overflow: hidden;
 
     & > img {
       height: 2.5rem;
       width: 2.5rem;
     }
+  }
+}
+
+.joining-code-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  button, h2, p {
+    margin: 0; 
+    font-size: large;
+    // margin: 0.5rem;
+  }
+  p{
+    margin-right: 1rem;
   }
 }

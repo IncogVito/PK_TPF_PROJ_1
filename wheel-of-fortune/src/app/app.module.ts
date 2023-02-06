@@ -36,6 +36,7 @@ import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
 import {JoinGameState} from "./modules/game/stores/join-game/join-game.state";
 import { WheelComponent } from './modules/game/wheel/wheel.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {CdkCopyToClipboard, ClipboardModule} from '@angular/cdk/clipboard'; 
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     MatMenuModule,
     MatCardModule,
     MatGridListModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    ClipboardModule,
   ],
   providers: [
     {

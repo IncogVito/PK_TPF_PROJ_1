@@ -14,9 +14,10 @@
 
     <!-- TODO KOŁO fortuny (jako osobny komponent powinno pójść, i jako argumenty zawierać liczbe części -->
     <app-wheel
-      [participants]="gameState.game.participants"
+      [game]="gameState.game"
     ></app-wheel>
     <!-- TODO Ilość osób co dołączyła -->
+    <h3>{{gameState.game.participants.length}} people have joined </h3>
     <mat-divider></mat-divider>
 
     <div class="game__participants">
@@ -28,12 +29,21 @@
 
 
     <!-- TODO Kod dołączenia do skopiowania -->
+    <div class="joining-code-div">
+      <p>Joining code:</p>
+    <h2 class="joining-code">{{gameState.game.joiningCode}}</h2>
+    <button mat-icon-button aria-label="copy" [cdkCopyToClipboard]="gameState.game.joiningCode">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+    </div>
+    <mat-divider></mat-divider>
 
-    <button class="u-full-width u-mt-2"
+
+    <!-- <button class="u-full-width u-mt-2"
             color="accent"
             mat-button>
       Utwórz
-    </button>
+    </button> -->
   </ng-container>
 
 

@@ -9,13 +9,14 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./wheel.component.css']
 })
 export class WheelComponent {
-  width: number = 450
-  height: number = 450
+  width: number = 350
+  height: number = 350
   pointerHeight = 30;
   working: boolean = false
   theWheel: any
   @ViewChild('winnerSwal') public readonly winnerSwal!: SwalComponent;
-  @Input() participants: ParticipantModel[] = [
+  @Input() game: GameModel;
+  participants: ParticipantModel[] = [
     {
       name: "Karol",
       id: "0",
@@ -53,6 +54,7 @@ export class WheelComponent {
     }
   }
   ngOnChanges() {
+    this.participants = this.game.participants
     // console.log("participants: ", this.participants)
     this.drawNewWheel()
   }
@@ -67,8 +69,8 @@ export class WheelComponent {
       'segments': participantsToSegments(this.participants),
       'animation': {
         'type': 'spinToStop',
-        'duration': 1,
-        'spins': 3,
+        'duration': this.game.singleGameTime,
+        'spins': this.game.singleGameTime,
         'callbackFinished': (seg) =>{this.wheelFinished(seg)}
       },
       'pins': {
@@ -101,15 +103,17 @@ function drawPointer(c: CanvasRenderingContext2D, width: number, pointerHeight: 
 }
 
 function participantsToSegments(partcipants: ParticipantModel[]) {
-  let colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
+  let colorArray = [ "#f4f1de", "#3d405b", "#e07a5f",
+    '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
     '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
     '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
-    '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+    '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
     '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC',
     '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
     '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680',
     '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
     '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
-    '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+    '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
+  ];
   return partcipants.map((p, idx) => { return { "text": p.name, "fillStyle": colorArray[idx % colorArray.length] } })
 }

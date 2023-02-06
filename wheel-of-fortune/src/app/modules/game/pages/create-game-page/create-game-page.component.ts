@@ -18,7 +18,7 @@ export class CreateGamePageComponent {
       singleGameTime: new FormControl(5)
     }
   )
-
+  
 
   constructor(private readonly store: Store) {
   }

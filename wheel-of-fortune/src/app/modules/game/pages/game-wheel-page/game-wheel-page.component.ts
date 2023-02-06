@@ -15,6 +15,7 @@ import {GameStateModel} from "../../stores/game/game.state-model";
 export class GameWheelPageComponent implements OnInit {
 
   public gameState$: Observable<GameStateModel> = EMPTY;
+  joiningCode: string = "";
 
   constructor(private readonly gameStateService: GameState,
               private activatedRoute: ActivatedRoute,
@@ -32,6 +33,7 @@ export class GameWheelPageComponent implements OnInit {
       .subscribe(data => {
         const game: GameModel = data['game'];
         this.gameIntegrationService.listenOnGameChanges(game.id);
+        this.joiningCode = game.joiningCode;
       });
   }
 }
