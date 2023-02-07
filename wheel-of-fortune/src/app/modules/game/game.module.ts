@@ -9,13 +9,15 @@ import { ChangeQuestionModalComponent } from './pages/change-question-modal/chan
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
+import { DrawingInProgressComponent } from './pages/drawing-in-progress/drawing-in-progress.component';
 
 
 @NgModule({
   declarations: [
     GameResultComponent,
     WheelComponent,
-    ChangeQuestionModalComponent
+    ChangeQuestionModalComponent,
+    DrawingInProgressComponent
   ],
   exports: [
     WheelComponent

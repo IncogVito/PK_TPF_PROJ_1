@@ -66,30 +66,32 @@ export class GameState {
     if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {
       throw new Error("Illegal state exception - different ids between current and updated");
     }
+
+    const previousGame = ctx.getState().game;
     ctx.patchState({
-      game: action.payload
+      game: {...previousGame, ...action.payload}
     })
   }
 
   @Action(GameActions.UpdateGameWithPropagation)
   updateGameWithPropagation(ctx: StateContext<GameStateModel>, action: GameActions.UpdateGameWithPropagation) {
     const ownerId = ctx.getState().game?.ownerId;
-    const updatedGame = {...ctx.getState().game, ...action.payload};
+    const gameId = ctx.getState().game?.id;
 
+    const fullUpdatedGame = {...ctx.getState().game, ...action.payload};
+
+    if (!ctx.getState().fetched || !gameId || !ownerId) {
+      throw new Error("Illegal state exception - not filled data");
+    }
     return this.authState$.pipe(
       take(1),
       filter(authState => authState.loggedIn),
       map(authState => authState.loggedUser),
       filter(loggedUser => loggedUser.userUid === ownerId),
+      switchMap(() => this.gameFirebaseService.updateGame(gameId, action.payload)),
+      take(1),
+      tap(() => ctx.patchState({game: fullUpdatedGame}))
     );
-
-
-    // if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {
-    //   throw new Error("Illegal state exception - different ids between current and updated");
-    // }
-    // ctx.patchState({
-    //   game: action.payload
-    // })
   }
 
   @Action(GameActions.UpdateParticipants)
@@ -111,6 +113,7 @@ export class GameState {
 
     return this.gameState$.pipe(
       filter(state => state.fetched),
+      tap(gameState => ctx.dispatch(new Navigate(['game', gameState.game.id]))),
       switchMap(gameState => {
         const userUid = action.payload.userUid;
         const participants = gameState.game.participants;

@@ -26,6 +26,7 @@ export class GameIntegrationService implements OnDestroy {
         if (snapshot.payload.exists) {
           const id = snapshot.payload.id;
           const data = snapshot.payload.data();
+
           this.store.dispatch(new GameActions.UpdateGame({...data, id}))
         } else {
           console.error('No such document!');

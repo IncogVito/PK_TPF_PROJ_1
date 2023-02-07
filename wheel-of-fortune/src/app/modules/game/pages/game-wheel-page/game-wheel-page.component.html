@@ -17,15 +17,14 @@
       </mat-icon>
     </div>
 
-    <!-- TODO <i>Tytuł losowania</i>-->
-
-    <!-- TODO KOŁO fortuny (jako osobny komponent powinno pójść, i jako argumenty zawierać liczbe części -->
-    <app-wheel
-      [game]="gameState.game"
-      (drawFinished)="onDrawFinished($event, gameState.game.currentQuestion)"
+    <app-wheel *ngIf="gameState.game?.participants"
+               [game]="gameState.game"
+               (drawFinished)="onDrawFinished($event, gameState.game.currentQuestion)"
     ></app-wheel>
-    <!-- TODO Ilość osób co dołączyła -->
-    <h3>{{gameState.game.participants.length}} people have joined </h3>
+
+    <h3 *ngIf="gameState.game.participants">
+      Dołączyło {{gameState.game.participants.length}} osób / osoby
+    </h3>
     <mat-divider></mat-divider>
 
     <div class="game__participants">
@@ -44,9 +43,9 @@
     </button>
 
     <mat-divider></mat-divider>
-    <!-- TODO Kod dołączenia do skopiowania -->
+
     <div class="joining-code-div">
-      <p>Joining code:</p>
+      <p>Kod zaproszenia:</p>
       <h2 class="joining-code">{{gameState.game.joiningCode}}</h2>
       <button mat-icon-button aria-label="copy" [cdkCopyToClipboard]="gameState.game.joiningCode">
         <mat-icon>content_copy</mat-icon>
@@ -54,12 +53,6 @@
     </div>
     <mat-divider></mat-divider>
 
-
-    <!-- <button class="u-full-width u-mt-2"
-            color="accent"
-            mat-button>
-      Utwórz
-    </button> -->
   </ng-container>
 
 

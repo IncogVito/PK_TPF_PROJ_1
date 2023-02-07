@@ -8,6 +8,9 @@ export interface GameModel {
   joiningCode: string;
   singleGameTime: number;
   currentQuestion: string;
+
+  drawInProgress: boolean;
+  chosenParticipant: ParticipantModel | undefined;
 }
 
 export interface ParticipantModel {

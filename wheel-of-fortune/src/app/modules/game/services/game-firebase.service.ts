@@ -24,6 +24,11 @@ export class GameFirebaseService {
       );
   }
 
+  public updateGame(gameId: string, gameForm: Partial<GameModel>): Observable<void> {
+    return fromPromise(this.firestore.collection(GameFirebaseService.COLLECTION_NAME).doc(gameId).update(gameForm))
+      .pipe(take(1));
+  }
+
   public loadGameById(gameId: string): Observable<GameModel | undefined> {
     return this.firestore.collection<GameModel>(GameFirebaseService.COLLECTION_NAME)
       .doc(gameId)
