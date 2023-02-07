@@ -15,6 +15,7 @@
     <!-- TODO KOŁO fortuny (jako osobny komponent powinno pójść, i jako argumenty zawierać liczbe części -->
     <app-wheel
       [game]="gameState.game"
+      (drawFinished)="onDrawFinished($event, gameState.game.currentQuestion)"
     ></app-wheel>
     <!-- TODO Ilość osób co dołączyła -->
     <h3>{{gameState.game.participants.length}} people have joined </h3>
@@ -27,14 +28,22 @@
       </div>
     </div>
 
+    <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80"
+            color="accent"
+            mat-flat-button
+            (click)="triggerWheel()"
+    >
+      Rozpocznij losowanie
+    </button>
 
+    <mat-divider></mat-divider>
     <!-- TODO Kod dołączenia do skopiowania -->
     <div class="joining-code-div">
       <p>Joining code:</p>
-    <h2 class="joining-code">{{gameState.game.joiningCode}}</h2>
-    <button mat-icon-button aria-label="copy" [cdkCopyToClipboard]="gameState.game.joiningCode">
-      <mat-icon>content_copy</mat-icon>
-    </button>
+      <h2 class="joining-code">{{gameState.game.joiningCode}}</h2>
+      <button mat-icon-button aria-label="copy" [cdkCopyToClipboard]="gameState.game.joiningCode">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
     <mat-divider></mat-divider>
 

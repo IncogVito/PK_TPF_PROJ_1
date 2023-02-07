@@ -1,1 +1,41 @@
-<p>game-result works!</p>
+<div class="game-result" *ngIf="pickedParticipant">
+
+  <h2 class="game-result__title">Losowanie na pytanie:</h2>
+  <span class="game-result__question">
+    "{{question}}"
+  </span>
+  <h2 class="game-result__title">wygrywa:</h2>
+
+
+  <div class="game-result__profile">
+    <img [src]="pickedParticipant.photoUrl" alt="User image"/>
+  </div>
+
+  <span class="game-result__name">
+    {{pickedParticipant.name}}
+  </span>
+
+
+  <div class="game-result__action">
+    <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80 game-result__action--primary"
+            color="accent"
+            mat-flat-button
+            (click)="continueWithAll()"
+    >
+      Kontynuuj ze wszystkimi
+    </button>
+
+    <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80 game-result__action--secondary"
+            color="accent"
+            mat-flat-button
+            (click)="continueWithoutPickedOne()"
+    >
+      Kontynuuj bez wylosowanej osoby
+    </button>
+
+    <span class="game-result__finish">
+      Zakończ rozgrywkę
+    </span>
+
+  </div>
+</div>

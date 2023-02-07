@@ -26,17 +26,17 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {NgxsModule} from "@ngxs/store";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
-import {MatCard, MatCardModule} from '@angular/material/card';
-import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
 import {GameState} from "./modules/game/stores/game/game.state";
 import {AuthState} from "./modules/core/stores/auth/auth.state";
 import {MatMenuModule} from "@angular/material/menu";
 import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
 import {JoinGameState} from "./modules/game/stores/join-game/join-game.state";
-import { WheelComponent } from './modules/game/wheel/wheel.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import {CdkCopyToClipboard, ClipboardModule} from '@angular/cdk/clipboard'; 
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import {GameModule} from "./modules/game/game.module";
 
 @NgModule({
   declarations: [
@@ -46,8 +46,7 @@ import {CdkCopyToClipboard, ClipboardModule} from '@angular/cdk/clipboard';
     MainPageComponent,
     GameWheelPageComponent,
     JoinGamePageComponent,
-    CreateGamePageComponent,
-    WheelComponent
+    CreateGamePageComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +81,7 @@ import {CdkCopyToClipboard, ClipboardModule} from '@angular/cdk/clipboard';
       provideSwal: () => import('sweetalert2/dist/sweetalert2.js')
     }),
     ClipboardModule,
+    GameModule,
   ],
   providers: [
     {
@@ -91,6 +91,7 @@ import {CdkCopyToClipboard, ClipboardModule} from '@angular/cdk/clipboard';
         ssl: false
       } : undefined
     }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

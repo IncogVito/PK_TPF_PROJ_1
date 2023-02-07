@@ -1,7 +1,7 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import * as WheelCanvas from './winwheel';
-import { GameModel, ParticipantModel } from "../model/game.model";
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import {GameModel, ParticipantModel} from "../model/game.model";
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-wheel',
@@ -9,13 +9,21 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./wheel.component.scss']
 })
 export class WheelComponent {
+
+  @ViewChild('winnerSwal')
+  public readonly winnerSwal!: SwalComponent;
+
+  @Input()
+  public game: GameModel;
+
+  @Output()
+  public drawFinished = new EventEmitter<ParticipantModel>();
+
   width: number = 350
   height: number = 350
   pointerHeight = 30;
   working: boolean = false
   theWheel: any
-  @ViewChild('winnerSwal') public readonly winnerSwal!: SwalComponent;
-  @Input() game: GameModel;
   participants: ParticipantModel[] = [
     {
       name: "Karol",
@@ -28,27 +36,25 @@ export class WheelComponent {
       photoUrl: "aaa"
     }
   ];
-  winner: ParticipantModel = null 
-  wheelFinished(winningSegment: any) {
-    console.log(winningSegment)
-    this.working = false;
-    console.log("wheel finished")
-    this.winner = this.participants.find(f => f.name == winningSegment.text)
-    console.log(this.winner)
-    // this.winnerSwal.text = `Winner is: ${winningSegment.name}`
-    this.winnerSwal.update({"title": `${this.winner.name}`})
-    this.winnerSwal.fire();
+  winner: ParticipantModel = null
 
+  wheelFinished(winningSegment: any) {
+    this.working = false;
+    this.winner = this.participants.find(f => f.name == winningSegment.text)
+    if (this.winner) {
+      this.drawFinished.emit(this.winner);
+    }
   }
-  resetWheel(){
+
+  resetWheel() {
     this.drawNewWheel()
   }
-  removeWinnerAndReset(){
-    // remove
+
+  removeWinnerAndReset() {
     this.drawNewWheel()
   }
-  wheelClick() {
-    console.log("wheel clicked");
+
+  triggerWheel() {
     if (this.working) {
       this.theWheel.stopAnimation();
       this.working = false;
@@ -57,13 +63,14 @@ export class WheelComponent {
       this.working = true;
     }
   }
+
   ngOnChanges() {
     this.participants = this.game.participants
     // console.log("participants: ", this.participants)
     this.drawNewWheel()
   }
 
-  drawNewWheel(){
+  drawNewWheel() {
     this.theWheel = new WheelCanvas({
       'canvasId': 'wheelCanvas',
       'textFontSize': '20',
@@ -75,7 +82,9 @@ export class WheelComponent {
         'type': 'spinToStop',
         'duration': this.game.singleGameTime,
         'spins': this.game.singleGameTime,
-        'callbackFinished': (seg) =>{this.wheelFinished(seg)}
+        'callbackFinished': (seg) => {
+          this.wheelFinished(seg)
+        }
       },
       'pins': {
         'number': this.participants.length,
@@ -107,7 +116,7 @@ function drawPointer(c: CanvasRenderingContext2D, width: number, pointerHeight: 
 }
 
 function participantsToSegments(partcipants: ParticipantModel[]) {
-  let colorArray = [ "#D8DBE2",  "#CC5803","#FCF300", "#F7934C",
+  let colorArray = ["#D8DBE2", "#CC5803", "#FCF300", "#F7934C",
     '#D7263D', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
     '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
     '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
@@ -119,5 +128,7 @@ function participantsToSegments(partcipants: ParticipantModel[]) {
     '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
     '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
   ];
-  return partcipants.map((p, idx) => { return { "text": p.name, "fillStyle": colorArray[idx % colorArray.length] } })
+  return partcipants.map((p, idx) => {
+    return {"text": p.name, "fillStyle": colorArray[idx % colorArray.length]}
+  })
 }

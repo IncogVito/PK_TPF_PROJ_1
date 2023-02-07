@@ -1,14 +1,14 @@
-<div class="wheelContainer" (click)="wheelClick()">
-    <swal
-  #winnerSwal
-  title="Winner"
-  icon="question"
-  [showDenyButton]="true"
-  confirmButtonText="continue with the winner"
-  denyButtonText="continute without the winner"
-  (deny)="removeWinnerAndReset()" 
-  (confirm)="resetWheel()">
-</swal>
-    <canvas id="pointerCanvas" width="{{width}}" height="{{pointerHeight}}" ></canvas>
-    <canvas id="wheelCanvas" width="{{width}}" height="{{height}}" ></canvas>
+<div class="wheelContainer">
+  <swal
+    #winnerSwal
+    title="Winner"
+    icon="question"
+    [showDenyButton]="true"
+    confirmButtonText="continue with the winner"
+    denyButtonText="continute without the winner"
+    (deny)="removeWinnerAndReset()"
+    (confirm)="resetWheel()">
+  </swal>
+  <canvas id="pointerCanvas" width="{{width}}" height="{{pointerHeight}}"></canvas>
+  <canvas id="wheelCanvas" width="{{width}}" height="{{height}}"></canvas>
 </div>

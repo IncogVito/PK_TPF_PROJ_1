@@ -1,0 +1,74 @@
+:host {
+  width: 90vw;
+  display: grid;
+  min-height: 50vh;
+}
+
+.game-result {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  &__title {
+    margin: auto;
+    display: block;
+    font-size: 1.5rem;
+  }
+
+  &__question {
+    font-size: 1.3rem;
+    font-style: italic;
+    display: block;
+    text-align: center;
+    overflow-wrap: break-word;
+    width: 80%;
+    margin: auto;
+    font-weight: 100;
+  }
+
+  &__profile {
+    & > img {
+      width: 65%;
+      border-radius: 50%;
+      display: block;
+      margin: 1rem auto;
+      border: 2px solid gold;
+    }
+  }
+
+  &__name {
+    font-size: 1.3rem;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+
+  &__action {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    &::ng-deep .mat-mdc-unelevated-button {
+      height: 3rem !important;
+    }
+
+    &::ng-deep {
+      .game-result__action--secondary.mat-mdc-unelevated-button {
+        background-color: transparent;
+        border: 1px solid #a555e8;
+      }
+    }
+  }
+
+
+  &__finish {
+    color: red;
+    font-weight: 500;
+  }
+}

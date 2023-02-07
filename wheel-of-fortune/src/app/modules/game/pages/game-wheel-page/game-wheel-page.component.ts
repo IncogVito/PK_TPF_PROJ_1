@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {GameIntegrationService} from "../../services/game-integration.service";
 import {ActivatedRoute} from "@angular/router";
 import {EMPTY, Observable, take} from "rxjs";
-import {GameModel} from "../../model/game.model";
+import {GameModel, ParticipantModel} from "../../model/game.model";
 import {GameState} from "../../stores/game/game.state";
 import {GameStateModel} from "../../stores/game/game.state-model";
+import {WheelComponent} from "../../wheel/wheel.component";
+import {MatDialog} from "@angular/material/dialog";
+import {GameResultComponent} from "../game-result/game-result.component";
 
 @Component({
   selector: 'app-game-wheel-page',
@@ -14,11 +17,15 @@ import {GameStateModel} from "../../stores/game/game.state-model";
 })
 export class GameWheelPageComponent implements OnInit {
 
+  @ViewChild(WheelComponent)
+  public wheelComponent: WheelComponent;
+
   public gameState$: Observable<GameStateModel> = EMPTY;
   joiningCode: string = "";
 
-  constructor(private readonly gameStateService: GameState,
+  constructor(private dialog: MatDialog,
               private activatedRoute: ActivatedRoute,
+              private readonly gameStateService: GameState,
               private readonly gameIntegrationService: GameIntegrationService) {
   }
 
@@ -35,5 +42,17 @@ export class GameWheelPageComponent implements OnInit {
         this.gameIntegrationService.listenOnGameChanges(game.id);
         this.joiningCode = game.joiningCode;
       });
+  }
+
+  triggerWheel() {
+    if (this.wheelComponent) {
+      this.wheelComponent.triggerWheel();
+    }
+  }
+
+  onDrawFinished($event: ParticipantModel, question: string) {
+    this.dialog.open(GameResultComponent, {
+      data: {pickedParticipant: $event, question: question}
+    });
   }
 }
