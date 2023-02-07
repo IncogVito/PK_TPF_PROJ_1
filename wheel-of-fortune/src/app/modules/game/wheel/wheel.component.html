@@ -3,7 +3,11 @@
   #winnerSwal
   title="Winner"
   icon="question"
-  
+  [showDenyButton]="true"
+  [customClass]="{ confirmButton: 'continue-with-btn', cancelButton: 'continue-without-btn' }"
+  confirmButtonText="continue with the winner"
+  denyButtonText="continute without the winner"
+  (deny)="removeWinnerAndReset()" 
   (confirm)="resetWheel()">
 </swal>
     <canvas id="pointerCanvas" width="{{width}}" height="{{pointerHeight}}" ></canvas>

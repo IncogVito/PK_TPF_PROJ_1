@@ -6,7 +6,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 @Component({
   selector: 'app-wheel',
   templateUrl: './wheel.component.html',
-  styleUrls: ['./wheel.component.css']
+  styleUrls: ['./wheel.component.scss']
 })
 export class WheelComponent {
   width: number = 350
@@ -37,11 +37,15 @@ export class WheelComponent {
     console.log(this.winner)
     // this.winnerSwal.text = `Winner is: ${winningSegment.name}`
     this.winnerSwal.update({"title": `${this.winner.name}`})
-    this.winnerSwal.fire().then((p) => this.drawNewWheel())
+    this.winnerSwal.fire();
 
   }
   resetWheel(){
-
+    this.drawNewWheel()
+  }
+  removeWinnerAndReset(){
+    // remove
+    this.drawNewWheel()
   }
   wheelClick() {
     console.log("wheel clicked");
@@ -90,8 +94,8 @@ function drawPointer(c: CanvasRenderingContext2D, width: number, pointerHeight: 
   let xStart = width / 2 - (pointerHeight / 2);
   c.save();
   c.lineWidth = 2;
-  c.strokeStyle = 'black';
-  c.fillStyle = 'black';
+  c.strokeStyle = '#415994';
+  c.fillStyle = '#415994';
   c.beginPath();
   c.moveTo(xStart, 10);
   c.lineTo(xStart + pointerHeight, 10);
@@ -103,8 +107,8 @@ function drawPointer(c: CanvasRenderingContext2D, width: number, pointerHeight: 
 }
 
 function participantsToSegments(partcipants: ParticipantModel[]) {
-  let colorArray = [ "#f4f1de", "#3d405b", "#e07a5f",
-    '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+  let colorArray = [ "#D8DBE2",  "#CC5803","#FCF300", "#F7934C",
+    '#D7263D', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
     '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
     '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
     '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',

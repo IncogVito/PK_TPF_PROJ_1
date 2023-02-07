@@ -60,10 +60,10 @@ $indigo-palette: (
   )
 );
 
-$my-primary: mat.define-palette($indigo-palette, 700, 700, 700);
-$my-accent: mat.define-palette($indigo-palette, 400, 400, 400, 400);
+$my-primary: mat.define-palette($indigo-palette);
+$my-accent: mat.define-palette($indigo-palette);
 
-$my-dark-theme: mat.define-light-theme(
+$my-dark-theme: mat.define-dark-theme(
   (
     color: (
       primary: $my-primary,
@@ -77,8 +77,8 @@ $color-config:    mat.get-color-config($my-dark-theme);
 @include mat.all-component-themes(modify-background($my-dark-theme, hsl(110, 93%, 21%)));
 // @include mat.all-component-themes($my-dark-theme);
 body {
-    background-color: #f2cc8f;
-    color: #3d405b;
+    background-color: #151422;
+    color: #e6e7f1;
 }
 
 // $my-primary: mat.define-palette(mat.$indigo-palette, 500);
