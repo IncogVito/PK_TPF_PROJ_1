@@ -29,19 +29,19 @@ $dark-primary-text: white;
 
 $indigo-palette: (
   50: #e8eaf6,
-  100: #c5cae9,
-  200: #9fa8da,
-  300: #7986cb,
-  400: #5c6bc0,
-  500: #3f51b5,
-  600: #3949ab,
-  700: #3d405b,
-  800: #283593,
-  900: #1a237e,
-  A100: #8c9eff,
-  A200: #536dfe,
-  A400: #3d5afe,
-  A700: #304ffe,
+  100: #ddd7ff,
+  200: #bbafff,
+  300: #7861a5,
+  400: #7354ac,
+  500: #a555e8,
+  600: #673ab7,
+  700: #3c2f80,
+  800: #382a82,
+  900: #251d6b,
+  A100: #bbafff,
+  A200: #7861a5,
+  A400: #7354ac,
+  A700: #673ab7,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -60,26 +60,44 @@ $indigo-palette: (
   )
 );
 
-$my-primary: mat.define-palette($indigo-palette);
+$my-primary: mat.define-palette($indigo-palette, $default: 600);
 $my-accent: mat.define-palette($indigo-palette);
 
 $my-dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: $my-primary,
-      accent: $my-accent,
-    ),
-    typography: mat.define-typography-config(),
-  )
+    (
+      color: (
+        primary: $my-primary,
+        accent: $my-accent,
+        sasa: $my-accent,
+      ),
+      typography: mat.define-typography-config(),
+    )
 );
 
 @include mat.all-component-themes($my-dark-theme);
 body {
-    background-color: #151422;
-    color: #e6e7f1;
+  background-color: #151422;
+  color: #e6e7f1;
 }
 
 $swal2-font: monospace;
 $swal2-icon-size: 5em;
 
 @import 'sweetalert2/src/sweetalert2';
+
+.mat-mdc-unelevated-button {
+  border-radius: .5rem !important;
+  height: 2.5rem !important;
+}
+
+.mat-mdc-menu-panel.mat-mdc-menu-panel {
+  max-width: 100vw !important;
+  width: 90vw !important;
+}
+
+.mat-mdc-menu-item {
+  margin: auto !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}

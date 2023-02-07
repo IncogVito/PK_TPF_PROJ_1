@@ -4,6 +4,7 @@
                     text="Dołącz do losowania"
                     routerLink="/join"
                     routerLinkActive="active"
+                    icon="shuffle"
 
   >
   </app-tile-primary>
@@ -12,6 +13,7 @@
                     [disabled]="!(userLoggedIn$ | async)"
                     [class.main-page__tile--disabled]="!(userLoggedIn$ | async)"
                     routerLink="create"
+                    icon="add_circle"
                     text="Stwórz nowe koło fortuny">
   </app-tile-primary>
 
