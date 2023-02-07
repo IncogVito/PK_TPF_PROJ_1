@@ -1,0 +1,33 @@
+<div class="change-question">
+
+  <h2>Zmiana pytania</h2>
+
+  <mat-form-field class="create-game__form"
+                  appearance="outline"
+                  color="primary"
+  >
+    <mat-label>Wprowadź nazwę pytania</mat-label>
+    <input matInput type="text"
+           [formControl]="questionForm"
+    >
+    <mat-error>
+      {{questionForm.get('name')?.errors | extractErrors}}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="change-question__action">
+    <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80"
+            color="accent"
+            mat-flat-button
+            (click)="saveValidated()"
+    >
+      Zapisz
+    </button>
+
+    <span class="change-question__finish u-mt-1"
+          (click)="close()"
+    >
+      Zamknij
+    </span>
+  </div>
+</div>

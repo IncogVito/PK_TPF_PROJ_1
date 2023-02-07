@@ -19,18 +19,28 @@ export namespace GameActions {
 
   export class UpdateGame {
     static readonly type = '[Game] UpdateGame';
+
     constructor(public payload: GameModel) {
+    }
+  }
+
+  export class UpdateGameWithPropagation {
+    static readonly type = '[Game] UpdateGameWithPropagation';
+
+    constructor(public payload: Partial<GameModel>) {
     }
   }
 
   export class UpdateParticipants {
     static readonly type = '[Game] UpdateParticipants';
+
     constructor(public payload: UpdateParticipantsPayload) {
     }
   }
 
   export class JoinUserToGame {
     static readonly type = '[Game] Join user to game';
+
     constructor(public payload: JoinUserToGamePayload) {
     }
   }

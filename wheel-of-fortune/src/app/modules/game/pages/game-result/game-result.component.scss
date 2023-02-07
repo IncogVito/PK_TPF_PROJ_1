@@ -2,6 +2,9 @@
   width: 90vw;
   display: grid;
   min-height: 50vh;
+
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .game-result {
@@ -38,6 +41,7 @@
       display: block;
       margin: 1rem auto;
       border: 2px solid gold;
+      max-width: 14rem;
     }
   }
 

@@ -8,6 +8,7 @@ import {GameStateModel} from "../../stores/game/game.state-model";
 import {WheelComponent} from "../../wheel/wheel.component";
 import {MatDialog} from "@angular/material/dialog";
 import {GameResultComponent} from "../game-result/game-result.component";
+import {ChangeQuestionModalComponent} from "../change-question-modal/change-question-modal.component";
 
 @Component({
   selector: 'app-game-wheel-page',
@@ -54,5 +55,14 @@ export class GameWheelPageComponent implements OnInit {
     this.dialog.open(GameResultComponent, {
       data: {pickedParticipant: $event, question: question}
     });
+  }
+
+  openChangeQuestionModal(question: string) {
+    this.dialog.open(ChangeQuestionModalComponent, {
+      data: {question: question}
+    })
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe(res => console.log(res));
   }
 }

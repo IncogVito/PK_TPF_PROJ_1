@@ -71,6 +71,27 @@ export class GameState {
     })
   }
 
+  @Action(GameActions.UpdateGameWithPropagation)
+  updateGameWithPropagation(ctx: StateContext<GameStateModel>, action: GameActions.UpdateGameWithPropagation) {
+    const ownerId = ctx.getState().game?.ownerId;
+    const updatedGame = {...ctx.getState().game, ...action.payload};
+
+    return this.authState$.pipe(
+      take(1),
+      filter(authState => authState.loggedIn),
+      map(authState => authState.loggedUser),
+      filter(loggedUser => loggedUser.userUid === ownerId),
+    );
+
+
+    // if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {
+    //   throw new Error("Illegal state exception - different ids between current and updated");
+    // }
+    // ctx.patchState({
+    //   game: action.payload
+    // })
+  }
+
   @Action(GameActions.UpdateParticipants)
   updateParticipants(ctx: StateContext<GameStateModel>, action: GameActions.UpdateParticipants) {
     if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {

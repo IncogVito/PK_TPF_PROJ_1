@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
 }
+
 .game {
   width: 100vw;
   display: block;
@@ -12,11 +13,46 @@
     margin-top: 1rem;
     margin-bottom: 0;
   }
+
   h3 {
     font-size: 1rem;
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 0;
+  }
+
+  &__question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: .5rem;
+    margin-top: 1.5rem;
+
+    & > span {
+      display: block;
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 100;
+      overflow-wrap: break-word;
+
+      max-width: 90%;
+    }
+
+
+    & > mat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.8rem;
+      height: 1.8rem;
+      font-size: 1.7rem;
+      border-radius: 0.5rem;
+      position: absolute;
+      right: -0.5rem;
+      top: 0.25rem;
+      background-color: var(--tile-text-on-color--primary-dark);
+    }
   }
 
   &__participants {
@@ -28,6 +64,7 @@
     &:not(:last-child) {
       margin-right: .2rem;
     }
+
     margin-top: 0.75rem;
     height: 2.5rem;
     width: 2.5rem;
@@ -42,17 +79,19 @@
   }
 }
 
-.joining-code-div{
+.joining-code-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
   button, h2, p {
-    margin: 0; 
+    margin: 0;
     font-size: large;
     // margin: 0.5rem;
   }
-  p{
+
+  p {
     margin-right: 1rem;
   }
 }

@@ -6,9 +6,16 @@
 
     <mat-divider></mat-divider>
 
-    <h3>
-      {{gameState.game.currentQuestion}}
-    </h3>
+
+    <div class="game__question">
+      <span>
+        "{{gameState.game.currentQuestion}}"
+      </span>
+
+      <mat-icon (click)="openChangeQuestionModal(gameState.game.currentQuestion)">
+        edit_note
+      </mat-icon>
+    </div>
 
     <!-- TODO <i>Tytuł losowania</i>-->
 

@@ -23,11 +23,11 @@ export class GameResultComponent implements OnInit {
   }
 
   continueWithAll() {
-
+    this.dialogRef.close();
   }
 
   continueWithoutPickedOne() {
-
+    this.dialogRef.close();
   }
 
 }
