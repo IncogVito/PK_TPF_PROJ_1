@@ -9,6 +9,7 @@ import {WheelComponent} from "../../wheel/wheel.component";
 import {MatDialog} from "@angular/material/dialog";
 import {GameResultComponent} from "../game-result/game-result.component";
 import {ChangeQuestionModalComponent} from "../change-question-modal/change-question-modal.component";
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-game-wheel-page',
@@ -27,11 +28,13 @@ export class GameWheelPageComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private activatedRoute: ActivatedRoute,
               private readonly gameStateService: GameState,
+              private breadcrumbService: BreadcrumbService,
               private readonly gameIntegrationService: GameIntegrationService) {
   }
 
   ngOnInit(): void {
     this.gameState$ = this.gameStateService.gameState$;
+    this.breadcrumbService.set('@game', 'Game');
     this.listenChanges();
   }
 

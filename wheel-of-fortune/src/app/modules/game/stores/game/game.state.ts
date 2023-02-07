@@ -39,7 +39,7 @@ export class GameState {
           game: fullGame
         })
       ),
-      tap(fullGame => ctx.dispatch(new Navigate(['game', fullGame.id])))
+      tap(fullGame => ctx.dispatch(new Navigate(['home', 'game', fullGame.id])))
     );
   }
 

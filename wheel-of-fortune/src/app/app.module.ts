@@ -37,6 +37,7 @@ import {JoinGameState} from "./modules/game/stores/join-game/join-game.state";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {GameModule} from "./modules/game/game.module";
+import { BreadcrumbModule } from "xng-breadcrumb";
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import {GameModule} from "./modules/game/game.module";
     }),
     ClipboardModule,
     GameModule,
+    BreadcrumbModule
   ],
   providers: [
     {

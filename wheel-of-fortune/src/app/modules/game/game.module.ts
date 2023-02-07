@@ -9,13 +9,16 @@ import { ChangeQuestionModalComponent } from './pages/change-question-modal/chan
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
+import { VacuumPageComponent } from './pages/vacuum-page/vacuum-page.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     GameResultComponent,
     WheelComponent,
-    ChangeQuestionModalComponent
+    ChangeQuestionModalComponent,
+    VacuumPageComponent
   ],
   exports: [
     WheelComponent
@@ -27,7 +30,8 @@ import {SharedModule} from "../shared/shared.module";
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    RouterOutlet
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
