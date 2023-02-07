@@ -23,10 +23,6 @@
   @return $modified-theme;
 };
 
-$dark-primary-text: red;
-$light-primary-text: red;
-$dark-primary-text: red;
-
 $indigo-palette: (
   50: #e8eaf6,
   100: #c5cae9,
@@ -73,24 +69,13 @@ $my-dark-theme: mat.define-dark-theme(
   )
 );
 
-$color-config:    mat.get-color-config($my-dark-theme);
-@include mat.all-component-themes(modify-background($my-dark-theme, hsl(110, 93%, 21%)));
-// @include mat.all-component-themes($my-dark-theme);
+@include mat.all-component-themes($my-dark-theme);
 body {
     background-color: #151422;
     color: #e6e7f1;
 }
 
-// $my-primary: mat.define-palette(mat.$indigo-palette, 500);
-// $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$swal2-font: monospace;
+$swal2-icon-size: 5em;
 
-// $my-theme: mat.define-light-theme((
-//  color: (
-//    primary: $my-primary,
-//    accent: $my-accent,
-//  ),
-//  typography: mat.define-typography-config(),
-//  density: 0,
-// ));
-
-// @include mat.all-component-themes($my-theme);
+@import 'sweetalert2/src/sweetalert2';
