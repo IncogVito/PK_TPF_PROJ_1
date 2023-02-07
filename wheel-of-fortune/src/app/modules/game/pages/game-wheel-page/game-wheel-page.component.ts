@@ -57,7 +57,8 @@ export class GameWheelPageComponent implements OnInit {
   onDrawFinished($event: ParticipantModel, question: string) {
     this.dialog.open(GameResultComponent, {
       data: {pickedParticipant: $event, question: question}
-    });
+    })
+    this.wheelComponent.drawNewWheel()
   }
 
   openChangeQuestionModal(question: string) {
@@ -66,6 +67,8 @@ export class GameWheelPageComponent implements OnInit {
     })
       .afterClosed()
       .pipe(take(1))
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        console.log(res)
+      });
   }
 }

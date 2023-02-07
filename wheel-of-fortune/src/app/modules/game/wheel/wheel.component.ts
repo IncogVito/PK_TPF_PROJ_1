@@ -55,13 +55,8 @@ export class WheelComponent {
   }
 
   triggerWheel() {
-    if (this.working) {
-      this.theWheel.stopAnimation();
-      this.working = false;
-    } else {
-      this.theWheel.startAnimation();
-      this.working = true;
-    }
+    // this.drawNewWheel()
+    this.theWheel.startAnimation();
   }
 
   ngOnChanges() {
