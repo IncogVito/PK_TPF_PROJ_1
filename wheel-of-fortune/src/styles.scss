@@ -2,3 +2,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @import "assets/sass/main";
+$swal2-font: monospace;
+$swal2-icon-size: 5em;
+
+@import 'sweetalert2/src/sweetalert2';

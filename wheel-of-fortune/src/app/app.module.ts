@@ -78,7 +78,9 @@ import {CdkCopyToClipboard, ClipboardModule} from '@angular/cdk/clipboard';
     MatMenuModule,
     MatCardModule,
     MatGridListModule,
-    SweetAlert2Module.forRoot(),
+    SweetAlert2Module.forRoot({
+      provideSwal: () => import('sweetalert2/dist/sweetalert2.js')
+    }),
     ClipboardModule,
   ],
   providers: [
