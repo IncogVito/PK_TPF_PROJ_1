@@ -4,6 +4,7 @@ import {Store} from "@ngxs/store";
 import {AuthActions} from "../stores/auth/auth.actions";
 import {AuthState} from "../stores/auth/auth.state";
 import {AuthStateModel} from "../stores/auth/auth.state-model";
+import {Navigate} from "@ngxs/router-plugin";
 
 
 @Component({
@@ -30,5 +31,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.store.dispatch(new AuthActions.LogOutUser());
+    this.store.dispatch(new Navigate(['']));
   }
 }

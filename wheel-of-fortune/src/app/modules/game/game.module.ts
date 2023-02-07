@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import { VacuumPageComponent } from './pages/vacuum-page/vacuum-page.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { DrawingInProgressComponent } from './pages/drawing-in-progress/drawing-in-progress.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { Router, RouterOutlet } from '@angular/router';
     GameResultComponent,
     WheelComponent,
     ChangeQuestionModalComponent,
-    VacuumPageComponent
+    VacuumPageComponent,
+    DrawingInProgressComponent
   ],
   exports: [
     WheelComponent
