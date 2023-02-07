@@ -39,6 +39,7 @@ Wywiad został umieszczony w pliku Documents/INTERVIEW.md
 
 ### Przygotowanie zadań 
 Team leader przygotował tablice do projektu, gdzie stworzył i rozdzielił zadania ze względu na członków zespołu oraz ich obowiązki w projekcie. Takie przygotowanie miało za zadanie kontrolować postęp w projekcie. Ostatecznie wsystkie zadania zostały ukończone co możemy zobaczyć na zdjęciu talicy poniżej:
+![plot](tasks.png)
 
 ### Przygotowanie makiety GUI
 UX designer w oparciu o przeprowadzony wywiad przygotował ostateczny widok aplikacji. Pomogło to zwizualizować wszystkie zawarte pomysły oraz mieć wyobrażenie dotyczące aplikacji.
@@ -75,6 +76,10 @@ Wyniki ankiety znajdują się w Documents/survey_2.pdf
 Team leader przygotował raport, który w skrócie opisuje przebieg działania projekty, kolejne kroki oraz zadania wykonane przez poszczególnych członków zespołu. Dokumentacja została napisana przez cały zespół. Znajdują się w niej wymagania aplikacji, sposób instalacji, informacje dla użytkownika o sposobie korzystania itp.
 
 Pełna dokumentacja znajduje się w pliku Documents/DOCUMENTATION.md
+
+
+### Jak można ulepszyć aplikację w przyszłości
+Kolejnymi krokami, które można zrealizować w przyszłości, aby ulepszyć aplikację jest możliwośćautomatycznego generowania listy bez grafiki. Oprócz tego uważamy, że moglibyśmy dodać opcje dla niezalogowanych użytkowników, aby administrator koła mógł ich ręcznie dodawać.
 
 
 
