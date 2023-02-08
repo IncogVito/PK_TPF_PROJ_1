@@ -48,7 +48,8 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        component: UserPageComponent
+        component: UserPageComponent,
+        data: { breadcrumb: { alias: 'user' } },
       },
       {
         path: '**',
