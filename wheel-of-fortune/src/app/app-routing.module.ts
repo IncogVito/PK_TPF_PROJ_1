@@ -7,6 +7,7 @@ import { GameWheelPageComponent } from "./modules/game/pages/game-wheel-page/gam
 import { GameDataResolverResolver } from "./modules/game/services/resolvers/game-data-resolver.resolver";
 import { WheelComponent } from "./modules/game/wheel/wheel.component";
 import { VacuumPageComponent } from "./modules/game/pages/vacuum-page/vacuum-page.component";
+import { UserPageComponent } from "./modules/game/pages/user-page/user-page.component";
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'wheel', // for testing
         component: WheelComponent
+      },
+      {
+        path: 'user',
+        component: UserPageComponent
       },
       {
         path: '**',
