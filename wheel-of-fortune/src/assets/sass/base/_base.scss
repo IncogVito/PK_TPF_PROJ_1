@@ -15,6 +15,7 @@ body {
 .mat-typography,
 .mat-body,
 body.mat-typography,
+.mat-typography h3,
 .mat-typography h2 {
   font-family: 'Nunito', sans-serif;
   // color: white;
@@ -32,4 +33,5 @@ body.mat-typography,
   font-weight: 200;
   font-size: 1rem;
   text-transform: capitalize;
+  font-size: .9rem;
 }

@@ -7,6 +7,7 @@ import {GameFirebaseService} from "../../services/game-firebase.service";
 import {Navigate} from "@ngxs/router-plugin";
 import {AuthStateModel} from "../../../core/stores/auth/auth.state-model";
 import {GameUtil} from "../../services/util/game.util";
+import {ArrayUtilService} from "../../../shared/service/util/array-util.service";
 
 @State<GameStateModel>({
   name: 'game',
@@ -56,7 +57,7 @@ export class GameState {
         tap(fullGame => console.log(fullGame)),
         tap(res => ctx.patchState({
           fetched: true,
-          game: res
+          game: {...res, participantsInCurrentGame: res.participants}
         }))
       )
   }
@@ -66,10 +67,11 @@ export class GameState {
     if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {
       throw new Error("Illegal state exception - different ids between current and updated");
     }
+    const participants = ctx.getState().game?.participants;
 
     const previousGame = ctx.getState().game;
     ctx.patchState({
-      game: {...previousGame, ...action.payload}
+      game: {...previousGame, ...action.payload, participants}
     })
   }
 
@@ -77,8 +79,9 @@ export class GameState {
   updateGameWithPropagation(ctx: StateContext<GameStateModel>, action: GameActions.UpdateGameWithPropagation) {
     const ownerId = ctx.getState().game?.ownerId;
     const gameId = ctx.getState().game?.id;
+    const participants = ctx.getState().game?.participants;
 
-    const fullUpdatedGame = {...ctx.getState().game, ...action.payload};
+    const fullUpdatedGame = {...ctx.getState().game, ...action.payload, participants};
 
     if (!ctx.getState().fetched || !gameId || !ownerId) {
       throw new Error("Illegal state exception - not filled data");
@@ -99,10 +102,13 @@ export class GameState {
     if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {
       throw new Error("Illegal state exception - different ids between current and updated");
     }
+    const updateParticipantsInCurrentGame = ArrayUtilService.isEmpty(ctx.getState().game.participantsInCurrentGame);
+
     ctx.patchState({
       game: {
         ...ctx.getState().game,
-        participants: action.payload.participants
+        participants: action.payload.participants,
+        participantsInCurrentGame: updateParticipantsInCurrentGame ? action.payload.participants : ctx.getState().game.participantsInCurrentGame
       }
     })
   }
@@ -113,7 +119,7 @@ export class GameState {
 
     return this.gameState$.pipe(
       filter(state => state.fetched),
-      tap(gameState => ctx.dispatch(new Navigate(['game', gameState.game.id]))),
+      tap(gameState => ctx.dispatch(new Navigate(['home', 'game', gameState.game.id]))),
       switchMap(gameState => {
         const userUid = action.payload.userUid;
         const participants = gameState.game.participants;
@@ -123,12 +129,10 @@ export class GameState {
           console.log(`User with uid: ${userUid} already in the game`);
           return EMPTY;
         }
-
         return this.gameFirebaseService.addSingleParticipant(
           gameState.game.id,
           GameUtil.toParticipantFromPayload(action.payload)
         )
-          .pipe(tap(() => console.log('DODAŁEM')));
       })
     )
   }

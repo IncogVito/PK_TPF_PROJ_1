@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ParticipantModel} from "../../model/game.model";
+import {GameDecisionMode, ParticipantModel} from "../../model/game.model";
 
 @Component({
   selector: 'app-game-result',
@@ -11,6 +11,7 @@ export class GameResultComponent implements OnInit {
 
   public pickedParticipant: ParticipantModel;
   public question: string = "";
+  public adminMode: boolean;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: any,
@@ -20,14 +21,18 @@ export class GameResultComponent implements OnInit {
   ngOnInit(): void {
     this.pickedParticipant = this.data.pickedParticipant;
     this.question = this.data.question;
+    this.adminMode = this.data.adminMode;
   }
 
   continueWithAll() {
-    this.dialogRef.close();
+    this.dialogRef.close(GameDecisionMode.ALL);
   }
 
   continueWithoutPickedOne() {
-    this.dialogRef.close();
+    this.dialogRef.close(GameDecisionMode.WITHOUT_LAST_ONE);
   }
 
+  close() {
+    this.dialogRef.close();
+  }
 }

@@ -1,58 +1,78 @@
 <section class="game page-content" *ngIf="gameState$ | async as gameState">
-  <ng-container *ngIf="gameState.game">
-    <h2>
-      {{gameState.game.name}}
-    </h2>
+  <ng-container *ngIf="authState$ | async as authStateArg">
+    <ng-container *ngIf="gameState.game">
+      <h2>
+        {{gameState.game.name}}
+      </h2>
 
-    <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
 
-    <div class="game__question">
+      <div class="game__question">
       <span>
         "{{gameState.game.currentQuestion}}"
       </span>
 
-      <mat-icon (click)="openChangeQuestionModal(gameState.game.currentQuestion)">
-        edit_note
-      </mat-icon>
-    </div>
-
-    <app-wheel *ngIf="gameState.game?.participants"
-               [game]="gameState.game"
-               (drawFinished)="onDrawFinished($event, gameState.game.currentQuestion)"
-    ></app-wheel>
-
-    <h3 *ngIf="gameState.game.participants">
-      Dołączyło {{gameState.game.participants.length}} osób / osoby
-    </h3>
-    <mat-divider></mat-divider>
-
-    <div class="game__participants">
-      <div class="game__single-participant"
-           *ngFor="let singleParticipant of gameState.game.participants">
-        <img [src]="singleParticipant.photoUrl" alt="User image"/>
+        <mat-icon (click)="openChangeQuestionModal(gameState.game.currentQuestion)">
+          edit_note
+        </mat-icon>
       </div>
-    </div>
 
-    <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80"
-            color="accent"
-            mat-flat-button
-            (click)="triggerWheel()"
-    >
-      Rozpocznij losowanie
-    </button>
+      <app-wheel *ngIf="gameState.game?.participants"
+                 [game]="gameState.game"
+                 (drawFinished)="onDrawFinished(
+                 $event,
+                 gameState.game.currentQuestion,
+                 authStateArg.loggedUser?.userUid === gameState.game.ownerId,
+                 gameState.game
+                 )"
+      ></app-wheel>
 
-    <mat-divider></mat-divider>
+      <h3 *ngIf="gameState.game.participants">
+        Dołączyło {{gameState.game.participants.length}} osób / osoby
+      </h3>
+      <mat-divider></mat-divider>
 
-    <div class="joining-code-div">
-      <p>Kod zaproszenia:</p>
-      <h2 class="joining-code">{{gameState.game.joiningCode}}</h2>
-      <button mat-icon-button aria-label="copy" [cdkCopyToClipboard]="gameState.game.joiningCode">
-        <mat-icon>content_copy</mat-icon>
+      <div class="game__participants">
+        <div class="game__single-participant"
+             *ngFor="let singleParticipant of gameState.game.participants">
+          <img [src]="singleParticipant.photoUrl" alt="User image"/>
+        </div>
+      </div>
+
+      <h3 *ngIf="gameState.game.participants">
+        Osób w biorących udział w losowaniu: {{gameState.game.participantsInCurrentGame?.length}}
+      </h3>
+      <mat-divider></mat-divider>
+
+      <div class="game__participants">
+        <div class="game__single-participant"
+             *ngFor="let singleParticipant of gameState.game.participantsInCurrentGame">
+          <img [src]="singleParticipant.photoUrl" alt="User image"/>
+        </div>
+      </div>
+
+      <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80"
+              color="accent"
+              mat-flat-button
+              [disabled]="authStateArg.loggedUser?.userUid !== gameState.game.ownerId"
+              (click)="triggerWheel()"
+      >
+        Rozpocznij losowanie
       </button>
-    </div>
-    <mat-divider></mat-divider>
 
+      <mat-divider></mat-divider>
+
+      <div class="joining-code-div">
+        <p>Kod zaproszenia:</p>
+        <h2 class="joining-code">{{gameState.game.joiningCode}}</h2>
+        <button mat-icon-button aria-label="copy" [cdkCopyToClipboard]="gameState.game.joiningCode">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+
+    </ng-container>
   </ng-container>
 
 

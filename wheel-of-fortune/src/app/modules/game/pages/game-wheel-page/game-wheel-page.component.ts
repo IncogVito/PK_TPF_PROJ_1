@@ -9,7 +9,7 @@ import {WheelComponent} from "../../wheel/wheel.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {GameResultComponent} from "../game-result/game-result.component";
 import {ChangeQuestionModalComponent} from "../change-question-modal/change-question-modal.component";
-import { BreadcrumbService } from 'xng-breadcrumb';
+import {BreadcrumbService} from 'xng-breadcrumb';
 import {Store} from "@ngxs/store";
 import {GameActions} from "../../stores/game/game.actions";
 import {AuthStateModel} from "../../../core/stores/auth/auth.state-model";
@@ -68,15 +68,13 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
   }
 
   triggerWheel() {
-    console.log(this.wheelComponent);
     if (this.wheelComponent) {
       this.wheelComponent.triggerWheel();
       this.store.dispatch(new GameActions.UpdateGameWithPropagation({drawInProgress: true}));
     }
   }
 
-  onDrawFinished($event: ParticipantModel, question: string) {
-    console.log('Draw finished');
+  onDrawFinished($event: ParticipantModel, question: string, adminMode: boolean, game: GameModel) {
     this.store.dispatch(
       new GameActions.UpdateGameWithPropagation({
           drawInProgress: false,
@@ -84,8 +82,10 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
         }
       ));
     this.dialog.open(GameResultComponent, {
-      data: {pickedParticipant: $event, question: question}
-    })
+      data: {pickedParticipant: $event, question: question, adminMode}
+    }).afterClosed()
+      .pipe(take(1))
+      .subscribe(res => console.log(res));
     this.wheelComponent.drawNewWheel()
   }
 
@@ -128,7 +128,7 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
         }
 
         this.dialog.open(GameResultComponent, {
-          data: {pickedParticipant: game.chosenParticipant, question: game.currentQuestion}
+          data: {pickedParticipant: game.chosenParticipant, question: game.currentQuestion, adminMode: false}
         });
       }
     });

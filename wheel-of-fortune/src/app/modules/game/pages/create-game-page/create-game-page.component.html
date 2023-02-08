@@ -21,7 +21,7 @@
                    formControlName="type"
   >
     <mat-radio-button value="single">Losowanie pojedyńczej osoby</mat-radio-button>
-    <mat-radio-button value="multiple">Losowanie listy osób</mat-radio-button>
+    <mat-radio-button value="multiple" disabled>Losowanie listy osób</mat-radio-button>
   </mat-radio-group>
 
   <ng-container *ngIf="createGameForm.get('type')?.value == 'single'">

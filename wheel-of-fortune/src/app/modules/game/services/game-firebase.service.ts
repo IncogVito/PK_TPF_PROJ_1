@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {catchError, map, Observable, of, take, tap} from "rxjs";
+import {catchError, EMPTY, map, Observable, of, switchMap, take, takeUntil, tap} from "rxjs";
 import {GameModel, ParticipantModel} from "../model/game.model";
 import {DocumentReference} from "@angular/fire/compat/firestore/interfaces";
 import {ArrayUtilService} from "../../shared/service/util/array-util.service";
+import {GameActions} from "../stores/game/game.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,10 @@ export class GameFirebaseService {
     return fromPromise(this.firestore.collection(GameFirebaseService.COLLECTION_NAME).add(gameForm))
       .pipe(
         map(res => this.combineWithId<GameModel>(gameForm, res)),
-        tap(res => this.addSingleParticipant(res.id, ArrayUtilService.getFirstRequired(res.participants)))
+        tap(res => this.addSingleParticipant(res.id, ArrayUtilService.getFirstRequired(res.participants))
+          .pipe(take(1))
+          .subscribe()
+        )
       );
   }
 
@@ -53,12 +57,34 @@ export class GameFirebaseService {
   }
 
   public addSingleParticipant(gameId: string, participantModel: ParticipantModel): Observable<any> {
-    console.log(participantModel);
-    return fromPromise(this.firestore.collection(GameFirebaseService.COLLECTION_NAME)
+    const doc = this.firestore.collection<GameModel>(GameFirebaseService.COLLECTION_NAME)
       .doc(gameId)
-      .collection("participants")
-      .add(participantModel)
-    );
+      .collection<ParticipantModel>('participants');
+
+    return doc.snapshotChanges()
+      .pipe(take(1),
+        switchMap(snapshots => {
+          if (snapshots) {
+            const participants = ArrayUtilService.emptyIfNull(snapshots)
+              .map(singleSnapshot => singleSnapshot.payload.doc.data()) as ParticipantModel[];
+            const alreadyIncluded = participants.some(single => single.id === participantModel.id);
+            if (alreadyIncluded) {
+              console.warn("ALREADY INCLUDED");
+              return of({});
+            } else {
+              return fromPromise(this.firestore.collection(GameFirebaseService.COLLECTION_NAME)
+                .doc(gameId)
+                .collection("participants")
+                .add(participantModel)
+              );
+            }
+
+          } else {
+            console.error('No such document!');
+            return of({});
+          }
+        })
+      );
   }
 
   private combineWithId<T>(entity: T, dr: DocumentReference<any>): T {

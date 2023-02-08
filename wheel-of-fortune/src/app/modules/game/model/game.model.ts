@@ -5,6 +5,7 @@ export interface GameModel {
   type: 'single' | 'multiple'
   creationDate: Date,
   participants: ParticipantModel[],
+  participantsInCurrentGame: ParticipantModel[]
   joiningCode: string;
   singleGameTime: number;
   currentQuestion: string;
@@ -17,4 +18,9 @@ export interface ParticipantModel {
   name: string;
   id: string;
   photoUrl: string;
+}
+
+export enum GameDecisionMode {
+  ALL = 'ALL',
+  WITHOUT_LAST_ONE = 'WITHOUT_LAST_ONE'
 }

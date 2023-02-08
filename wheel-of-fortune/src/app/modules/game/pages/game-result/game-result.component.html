@@ -21,6 +21,7 @@
             color="accent"
             mat-flat-button
             (click)="continueWithAll()"
+            *ngIf="adminMode"
     >
       Kontynuuj ze wszystkimi
     </button>
@@ -29,11 +30,21 @@
             color="accent"
             mat-flat-button
             (click)="continueWithoutPickedOne()"
+            *ngIf="adminMode"
     >
       Kontynuuj bez wylosowanej osoby
     </button>
 
-    <span class="game-result__finish">
+    <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80 game-result__action--secondary"
+            color="accent"
+            mat-flat-button
+            (click)="close()"
+            *ngIf="!adminMode"
+    >
+      Zamknij okno
+    </button>
+
+    <span class="game-result__finish" (click)="close()">
       Zakończ rozgrywkę
     </span>
 
