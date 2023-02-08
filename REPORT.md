@@ -37,8 +37,7 @@ UX designer przeprowadził wywiad z team leaderem na temat ostatecznego kształt
 Wywiad został umieszczony w pliku Documents/INTERVIEW.md
 
 ### Przygotowanie zadań 
-Team leader przygotował tablice do projektu, gdzie stworzył i rozdzielił zadania ze względu na członków zespołu oraz ich obowiązki w projekcie. Takie przygotowanie miało za zadanie kontrolować postęp w projekcie. Ostatecznie wsystkie zadania zostały ukończone co możemy zobaczyć na zdjęciu talicy poniżej:
-![plot](Documents/photos/tasks.png)
+Team leader przygotował tablice do projektu, gdzie stworzył i rozdzielił zadania ze względu na członków zespołu oraz ich obowiązki w projekcie. Takie przygotowanie miało za zadanie kontrolować postęp w projekcie. 
 
 ### Przygotowanie makiety GUI
 UX designer w oparciu o przeprowadzony wywiad przygotował ostateczny widok aplikacji. Pomogło to zwizualizować wszystkie zawarte pomysły oraz mieć wyobrażenie dotyczące aplikacji.
@@ -56,7 +55,6 @@ Połączony kod znajduje się w katalogu wheel-of-fortune
 ### Konfiguracja ze środowiskiem zewnętrznym
 DevOps odpowiedzialny był za połączenie aplikacji z środowiskiem zewnętrznym. Krok ten był potrzebny, aby móc fizycznie przetestować poprawność działania aplikacji oraz sprawić, że użytkownicy mogli z niej korzystać. 
 
-Aplikację możemy znaleźć pod podanym linkiem: 
 
 ### Testy aplikacji
 Testy odbywały się wewnątrz zespołu. Uznaliśmy, że każdy członek zespołu przetestuje aplikację pod kątem funkcjonalności i poprawności działania. Testybyły manualne i odbywały się głównie bez znajomości implementacji kodu (testy black boxowe), bo zawsze 2 z 3 osób nie znały struktury kodu, a znały tylko oczekiwane rezultaty. Developer implementujący swoją część również testował poprawność działania na środowisku zewnętrznym.
@@ -73,7 +71,7 @@ Pełna dokumentacja znajduje się w pliku Documents/DOCUMENTATION.md
 
 
 ### Jak można ulepszyć aplikację w przyszłości
-Kolejnymi krokami, które można zrealizować w przyszłości, aby ulepszyć aplikację jest możliwośćautomatycznego generowania listy bez grafiki. Oprócz tego uważamy, że moglibyśmy dodać opcje dla niezalogowanych użytkowników, aby administrator koła mógł ich ręcznie dodawać.
+Kolejnymi krokami, które można zrealizować w przyszłości, aby ulepszyć aplikację jest możliwość automatycznego generowania listy bez grafiki. Oprócz tego uważamy, że moglibyśmy dodać opcje dla niezalogowanych użytkowników, aby administrator koła mógł ich ręcznie dodawać.
 
 
 
