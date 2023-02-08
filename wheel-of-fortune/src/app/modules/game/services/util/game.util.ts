@@ -27,7 +27,7 @@ export class GameUtil {
       joiningCode: generatedCode,
       ownerId: authState.loggedUser.userUid,
       participants: [this.toParticipant(authState.loggedUser)],
-      participantsInCurrentGame: [],
+      participantsInCurrentGame: [this.toParticipant(authState.loggedUser)],
       type: gameFormModel.type,
       singleGameTime: Number(gameFormModel.singleGameTime),
       drawInProgress: false,

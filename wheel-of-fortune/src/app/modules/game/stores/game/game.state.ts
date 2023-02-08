@@ -107,6 +107,13 @@ export class GameState {
       ArrayUtilService.lengthOf(ctx.getState().game.participants)
       === ArrayUtilService.lengthOf(ctx.getState().game.participantsInCurrentGame);
 
+    if (updateParticipantsInCurrentGame) {
+      ctx.dispatch(new GameActions.UpdateParticipantsInCurrentGameWithPropagation({
+        participants: action.payload.participants,
+        id: ctx.getState().game.id
+      }))
+    }
+
     ctx.patchState({
       game: {
         ...ctx.getState().game,
