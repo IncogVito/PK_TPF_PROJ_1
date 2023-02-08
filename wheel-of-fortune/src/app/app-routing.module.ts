@@ -18,13 +18,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    data: { breadcrumb: { alias: 'home' } },
+    data: { breadcrumb: { alias: 'home1' } },
     component: VacuumPageComponent,
     children: [
       {
         path: '',
         component: MainPageComponent,
-        data: { breadcrumb: { alias: '' } },
+        data: { breadcrumb: { alias: 'home' } },
       },
       {
         path: 'join',
@@ -49,7 +49,7 @@ const routes: Routes = [
       {
         path: 'user',
         component: UserPageComponent,
-        data: { breadcrumb: { alias: 'user' } },
+        data: { breadcrumb: { alias: 'userProfile' } },
       },
       {
         path: '**',

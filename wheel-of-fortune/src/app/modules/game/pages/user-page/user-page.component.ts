@@ -29,9 +29,9 @@ export class UserPageComponent {
   }
 
   ngOnInit(): void {
+    this.breadcrumbService.set('@userProfile', 'Profil');
     this.store.dispatch(new AuthActions.FetchUser());
     this.authState$ = this.authState.authState$;
-    this.breadcrumbService.set('@user', 'Profil');
     console.log(this.authState$,"dupa")
   }
 
