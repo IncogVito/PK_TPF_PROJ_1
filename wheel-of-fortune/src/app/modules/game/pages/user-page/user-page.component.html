@@ -1,10 +1,13 @@
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="authState$ | async as authState">
     <div class="col-12">
       <mat-card class="example-card">
         <mat-card-header class="aaa">
-          <div mat-card-avatar class="avatar" style="background-image: url('{{this.dupa}}'); background-size: cover;"></div>
-          <mat-card-title class="bbb">{{this.dupaa}}</mat-card-title>
+          <div mat-card-avatar class="avatar"
+               style="background-size: contain"
+               [ngStyle]="authState ? {'background-image': 'url('+authState.loggedUser.imageUrl+')'} : {}">
+          </div>
+          <mat-card-title class="bbb">{{authState.loggedUser.username}}</mat-card-title>
         </mat-card-header>
       </mat-card>
     </div>

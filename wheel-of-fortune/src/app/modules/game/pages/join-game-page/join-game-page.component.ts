@@ -11,14 +11,13 @@ import { JoinGameActions } from "../../stores/join-game/join-game.actions";
 export class JoinGamePageComponent {
   codeInputValue = "";
 
-
   constructor(private readonly store: Store, private breadcrumbService: BreadcrumbService,
-  ) {
-  }
+  ) {}
 
   joinGame() {
     this.store.dispatch(new JoinGameActions.JoinGameRequest({ joiningCode: this.codeInputValue }));
   }
+
   ngOnInit(){
     this.breadcrumbService.set('@join', 'Dołącz');
   }
