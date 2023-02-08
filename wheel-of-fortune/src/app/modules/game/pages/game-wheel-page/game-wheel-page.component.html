@@ -36,7 +36,14 @@
       <div class="game__participants">
         <div class="game__single-participant"
              *ngFor="let singleParticipant of gameState.game.participants">
-          <img [src]="singleParticipant.photoUrl" alt="User image"/>
+          <mat-icon *ngIf="singleParticipant.activeInCurrentGame"
+                    class="game__single-participant-icon"
+          >
+            check_circle
+          </mat-icon>
+          <div class="game__single-participant-photo">
+            <img [src]="singleParticipant.photoUrl" alt="User image"/>
+          </div>
         </div>
       </div>
 
@@ -44,13 +51,6 @@
         Osób w biorących udział w losowaniu: {{gameState.game.participantsInCurrentGame?.length}}
       </h3>
       <mat-divider></mat-divider>
-
-      <div class="game__participants">
-        <div class="game__single-participant"
-             *ngFor="let singleParticipant of gameState.game.participantsInCurrentGame">
-          <img [src]="singleParticipant.photoUrl" alt="User image"/>
-        </div>
-      </div>
 
       <button class="u-mt-05 u-mb-05 u-m-auto d-block u-width-80"
               color="accent"

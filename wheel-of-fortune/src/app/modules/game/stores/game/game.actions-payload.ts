@@ -13,3 +13,9 @@ export interface UpdateParticipantsPayload {
   id: string;
   participants: ParticipantModel[];
 }
+
+export interface SingleDrawResult {
+  gameId: string;
+  question: string;
+  winnerName: string;
+}

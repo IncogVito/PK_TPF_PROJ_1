@@ -14,6 +14,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { DrawingInProgressComponent } from './pages/drawing-in-progress/drawing-in-progress.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { MatIconModule } from '@angular/material/icon';
+import { FinishedGameResultComponent } from './pages/finished-game-result/finished-game-result.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     WheelComponent,
     ChangeQuestionModalComponent,
     VacuumPageComponent,
-    DrawingInProgressComponent
+    DrawingInProgressComponent,
+    FinishedGameResultComponent
   ],
   exports: [
     WheelComponent

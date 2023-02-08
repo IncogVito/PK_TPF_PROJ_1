@@ -9,6 +9,7 @@ export interface GameModel {
   joiningCode: string;
   singleGameTime: number;
   currentQuestion: string;
+  gameFinished: boolean;
 
   drawInProgress: boolean;
   chosenParticipant: ParticipantModel | undefined;
@@ -18,9 +19,11 @@ export interface ParticipantModel {
   name: string;
   id: string;
   photoUrl: string;
+  activeInCurrentGame?: boolean;
 }
 
 export enum GameDecisionMode {
   ALL = 'ALL',
-  WITHOUT_LAST_ONE = 'WITHOUT_LAST_ONE'
+  WITHOUT_LAST_ONE = 'WITHOUT_LAST_ONE',
+  FINISH = 'FINISH'
 }

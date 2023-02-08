@@ -6,6 +6,7 @@ import {GameModel, ParticipantModel} from "../model/game.model";
 import {DocumentReference} from "@angular/fire/compat/firestore/interfaces";
 import {ArrayUtilService} from "../../shared/service/util/array-util.service";
 import {GameActions} from "../stores/game/game.actions";
+import {SingleDrawResult} from "../stores/game/game.actions-payload";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import {GameActions} from "../stores/game/game.actions";
 export class GameFirebaseService {
 
   public static readonly COLLECTION_NAME = 'games';
+  public static readonly COLLECTION_HISTORY_NAME = 'games-history';
 
   constructor(private readonly firestore: AngularFirestore) {
   }
@@ -84,6 +86,22 @@ export class GameFirebaseService {
             return of({});
           }
         })
+      );
+  }
+
+  public addResultToHistoryData(singleDrawResult: SingleDrawResult): void {
+    fromPromise(this.firestore.collection(GameFirebaseService.COLLECTION_HISTORY_NAME).add(singleDrawResult))
+      .pipe(take(1))
+      .subscribe();
+  }
+
+  public loadResultDataOfGame(gameId: string): Observable<SingleDrawResult[]> {
+    return this.firestore.collection<SingleDrawResult>(GameFirebaseService.COLLECTION_HISTORY_NAME,
+      ref => ref.where('gameId', '==', gameId)
+    ).valueChanges()
+      .pipe(
+        take(1),
+        catchError(() => of([]))
       );
   }
 

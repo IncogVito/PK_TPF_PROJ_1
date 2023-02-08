@@ -80,8 +80,9 @@ export class GameState {
     const ownerId = ctx.getState().game?.ownerId;
     const gameId = ctx.getState().game?.id;
     const participants = ctx.getState().game?.participants;
+    const participantsInCurrentGame = ctx.getState().game?.participantsInCurrentGame;
 
-    const fullUpdatedGame = {...ctx.getState().game, ...action.payload, participants};
+    const fullUpdatedGame = {...ctx.getState().game, ...action.payload, participants, participantsInCurrentGame};
 
     if (!ctx.getState().fetched || !gameId || !ownerId) {
       throw new Error("Illegal state exception - not filled data");
@@ -115,6 +116,27 @@ export class GameState {
     })
   }
 
+  @Action(GameActions.UpdateParticipantsInCurrentGameWithPropagation)
+  updateParticipantsInCurrentGame(ctx: StateContext<GameStateModel>, action: GameActions.UpdateParticipantsInCurrentGameWithPropagation) {
+    const ownerId = ctx.getState().game?.ownerId;
+    const gameId = ctx.getState().game?.id;
+    const participantsInCurrentGame = action.payload.participants;
+    const fullUpdatedGame = {...ctx.getState().game, participantsInCurrentGame};
+
+    if (!ctx.getState().fetched || !gameId || !ownerId) {
+      throw new Error("Illegal state exception - not filled data");
+    }
+    return this.authState$.pipe(
+      take(1),
+      filter(authState => authState.loggedIn),
+      map(authState => authState.loggedUser),
+      filter(loggedUser => loggedUser.userUid === ownerId),
+      switchMap(() => this.gameFirebaseService.updateGame(gameId, {participantsInCurrentGame})),
+      take(1),
+      tap(() => ctx.patchState({game: fullUpdatedGame}))
+    );
+  }
+
 
   @Action(GameActions.JoinUserToGame)
   joinUserToGame(ctx: StateContext<GameStateModel>, action: GameActions.JoinUserToGame) {
@@ -137,5 +159,10 @@ export class GameState {
         )
       })
     )
+  }
+
+  @Action(GameActions.AddToHistory)
+  addResultToHistory(ctx: StateContext<GameStateModel>, action: GameActions.AddToHistory) {
+    this.gameFirebaseService.addResultToHistoryData(action.payload);
   }
 }

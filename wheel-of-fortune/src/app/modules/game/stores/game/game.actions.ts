@@ -1,6 +1,6 @@
 import {GameFormModel, GameSearchModel} from "../../model/game-form.model";
 import {GameModel} from "../../model/game.model";
-import {JoinUserToGamePayload, UpdateParticipantsPayload} from "./game.actions-payload";
+import {JoinUserToGamePayload, SingleDrawResult, UpdateParticipantsPayload} from "./game.actions-payload";
 
 export namespace GameActions {
   export class CreateNewGame {
@@ -35,6 +35,20 @@ export namespace GameActions {
     static readonly type = '[Game] UpdateParticipants';
 
     constructor(public payload: UpdateParticipantsPayload) {
+    }
+  }
+
+  export class UpdateParticipantsInCurrentGameWithPropagation {
+    static readonly type = '[Game] UpdateParticipantsInCurrentGameWithPropagation';
+
+    constructor(public payload: UpdateParticipantsPayload) {
+    }
+  }
+
+  export class AddToHistory {
+    static readonly type = '[Game] AddToHistory';
+
+    constructor(public payload: SingleDrawResult) {
     }
   }
 

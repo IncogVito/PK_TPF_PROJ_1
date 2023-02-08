@@ -1,0 +1,26 @@
+<div class="finished-game-result">
+
+  <h2 class="finished-game-result__title u-mb-2">Gra zakończona!</h2>
+
+  <div class="finished-game-result__results">
+    <div class="finished-game-result__single-result" *ngFor="let single of (gameResults$ | async);let idx = index">
+
+      <span class="single-result__title">
+        {{idx + 1}}. {{single.question}}
+      </span>
+
+      <span class="single-result__winner">
+        {{single.winnerName}}
+      </span>
+    </div>
+  </div>
+
+  <button class="u-mt-2 u-mb-05 u-m-auto d-block u-width-80"
+          color="accent"
+          mat-flat-button
+          (click)="close()"
+  >
+    Zakończ
+  </button>
+
+</div>

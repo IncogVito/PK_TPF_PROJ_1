@@ -6,6 +6,8 @@ import {ArrayUtilService} from "../../../shared/service/util/array-util.service"
 import {StringUtilService} from "../../../shared/service/util/string-util.service";
 import {ObjectUtilService} from "../../../shared/service/util/object-utils.service";
 import {JoinUserToGamePayload} from "../../stores/game/game.actions-payload";
+import {GameState} from "../../stores/game/game.state";
+import {GameStateModel} from "../../stores/game/game.state-model";
 
 export class GameUtil {
 
@@ -29,7 +31,33 @@ export class GameUtil {
       type: gameFormModel.type,
       singleGameTime: Number(gameFormModel.singleGameTime),
       drawInProgress: false,
-      chosenParticipant: {} as any
+      chosenParticipant: {} as any,
+      gameFinished: false
+    }
+  }
+
+  public static markParticipantsAsActive(gameState: GameStateModel): GameStateModel {
+    if (!gameState.fetched) {
+      return gameState;
+    }
+
+    const activeParticipantsIds = ArrayUtilService.emptyIfNull(gameState.game.participantsInCurrentGame)
+      .map(single => single.id);
+
+    const markedAllParticipants = ArrayUtilService.emptyIfNull(gameState.game.participants)
+      .map(single => {
+        return {
+          ...single,
+          activeInCurrentGame: activeParticipantsIds.includes(single.id)
+        }
+      });
+
+    return {
+      ...gameState,
+      game: {
+        ...gameState.game,
+        participants: markedAllParticipants
+      }
     }
   }
 

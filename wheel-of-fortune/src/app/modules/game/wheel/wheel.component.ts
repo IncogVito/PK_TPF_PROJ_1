@@ -62,7 +62,7 @@ export class WheelComponent {
   }
 
   ngOnChanges() {
-    this.participants = this.game.participants
+    this.participants = this.game.participantsInCurrentGame
     this.drawNewWheel()
   }
 

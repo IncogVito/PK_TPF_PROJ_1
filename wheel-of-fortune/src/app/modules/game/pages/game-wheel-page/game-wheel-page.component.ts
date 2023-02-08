@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {GameIntegrationService} from "../../services/game-integration.service";
 import {ActivatedRoute} from "@angular/router";
 import {combineLatest, EMPTY, filter, map, Observable, Subject, take, takeUntil} from "rxjs";
-import {GameModel, ParticipantModel} from "../../model/game.model";
+import {GameDecisionMode, GameModel, ParticipantModel} from "../../model/game.model";
 import {GameState} from "../../stores/game/game.state";
 import {GameStateModel} from "../../stores/game/game.state-model";
 import {WheelComponent} from "../../wheel/wheel.component";
@@ -15,6 +15,9 @@ import {GameActions} from "../../stores/game/game.actions";
 import {AuthStateModel} from "../../../core/stores/auth/auth.state-model";
 import {AuthState} from "../../../core/stores/auth/auth.state";
 import {DrawingInProgressComponent} from "../drawing-in-progress/drawing-in-progress.component";
+import {GameUtil} from "../../services/util/game.util";
+import {ArrayUtilService} from "../../../shared/service/util/array-util.service";
+import {FinishedGameResultComponent} from "../finished-game-result/finished-game-result.component";
 
 @Component({
   selector: 'app-game-wheel-page',
@@ -45,7 +48,9 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.gameState$ = this.gameStateService.gameState$;
+    this.gameState$ = this.gameStateService.gameState$
+      .pipe(map(state => GameUtil.markParticipantsAsActive(state)));
+
     this.breadcrumbService.set('@game', 'Losowanie');
     this.authState$ = this.authState.authState$;
     this.listenChanges();
@@ -64,6 +69,7 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
         this.joiningCode = game.joiningCode;
 
         this.listenNonAdminChanges();
+        this.listenNonAdminGameFinished();
       });
   }
 
@@ -74,18 +80,49 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDrawFinished($event: ParticipantModel, question: string, adminMode: boolean, game: GameModel) {
+  onDrawFinished(pickedParticipant: ParticipantModel, question: string, adminMode: boolean, game: GameModel) {
     this.store.dispatch(
       new GameActions.UpdateGameWithPropagation({
           drawInProgress: false,
-          chosenParticipant: $event
+          chosenParticipant: pickedParticipant
         }
       ));
+
+    this.store.dispatch(new GameActions.AddToHistory({
+      gameId: game.id,
+      question: game.currentQuestion,
+      winnerName: pickedParticipant.name
+    }));
+
     this.dialog.open(GameResultComponent, {
-      data: {pickedParticipant: $event, question: question, adminMode}
+      data: {pickedParticipant: pickedParticipant, question: question, adminMode}
     }).afterClosed()
       .pipe(take(1))
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        if (GameDecisionMode.ALL === res) {
+          this.store.dispatch(new GameActions.UpdateParticipantsInCurrentGameWithPropagation({
+            participants: game.participants,
+            id: game.id
+          }));
+        }
+        if (GameDecisionMode.WITHOUT_LAST_ONE === res) {
+          let currentActivesParticipantsWithoutPicked = ArrayUtilService.emptyIfNull(game.participantsInCurrentGame)
+            .filter(single => single.id !== pickedParticipant.id);
+
+          if (ArrayUtilService.isEmpty(currentActivesParticipantsWithoutPicked)) {
+            currentActivesParticipantsWithoutPicked = [...game.participants];
+          }
+          this.store.dispatch(new GameActions.UpdateParticipantsInCurrentGameWithPropagation({
+            participants: currentActivesParticipantsWithoutPicked,
+            id: game.id
+          }));
+        }
+
+        if (GameDecisionMode.FINISH === res) {
+          this.store.dispatch(new GameActions.UpdateGameWithPropagation({gameFinished: true}));
+          this.dialog.open(FinishedGameResultComponent, {data: {gameId: game.id}});
+        }
+      });
     this.wheelComponent.drawNewWheel()
   }
 
@@ -131,6 +168,22 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
           data: {pickedParticipant: game.chosenParticipant, question: game.currentQuestion, adminMode: false}
         });
       }
+    });
+  }
+
+  private listenNonAdminGameFinished() {
+    const gameObs$ = this.gameState$.pipe(takeUntil(this.ngDestroy$));
+    const authObs$ = this.authState$.pipe(takeUntil(this.ngDestroy$));
+
+    combineLatest([gameObs$, authObs$])
+      .pipe(takeUntil(this.ngDestroy$),
+        filter(([gameState, authState]) => gameState.game && authState.loggedIn),
+        filter(([gameState, authState]) => gameState.game.ownerId !== authState.loggedUser.userUid),
+        map(([gameState, _]) => gameState.game),
+        filter(game => game.gameFinished),
+        take(1)
+      ).subscribe(game => {
+      this.dialog.open(FinishedGameResultComponent, {data: {gameId: game.id}});
     });
   }
 }

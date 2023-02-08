@@ -44,7 +44,9 @@
       Zamknij okno
     </button>
 
-    <span class="game-result__finish" (click)="close()">
+    <span class="game-result__finish" (click)="finishGame()"
+          *ngIf="adminMode"
+    >
       Zakończ rozgrywkę
     </span>
 

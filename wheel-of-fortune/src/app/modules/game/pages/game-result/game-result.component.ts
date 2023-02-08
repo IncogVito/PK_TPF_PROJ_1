@@ -35,4 +35,8 @@ export class GameResultComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+
+  finishGame() {
+    this.dialogRef.close(GameDecisionMode.FINISH);
+  }
 }
