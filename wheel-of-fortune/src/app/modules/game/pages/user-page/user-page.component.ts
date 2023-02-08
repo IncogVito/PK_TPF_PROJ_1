@@ -4,6 +4,7 @@ import {AuthState} from "../../../core/stores/auth/auth.state";
 import { AuthStateModel, LoggedUser } from 'src/app/modules/core/stores/auth/auth.state-model';
 import { AuthActions } from 'src/app/modules/core/stores/auth/auth.actions';
 import { Store } from '@ngxs/store';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-user-page',
@@ -19,7 +20,9 @@ export class UserPageComponent {
   store: any;
 
 
-  constructor(private readonly authState: AuthState) {
+  constructor(private readonly authState: AuthState,
+              private breadcrumbService: BreadcrumbService,
+    ) {
     this.userLoggedIn$ = this.authState.authState$.pipe(map(state => state.loggedIn));
     this.authState.authState$.subscribe(event => this.dupa = event.loggedUser.imageUrl);
     this.authState.authState$.subscribe(event => this.dupaa = event.loggedUser.username);
@@ -28,6 +31,7 @@ export class UserPageComponent {
   ngOnInit(): void {
     this.store.dispatch(new AuthActions.FetchUser());
     this.authState$ = this.authState.authState$;
+    this.breadcrumbService.set('@user', 'Profil');
     console.log(this.authState$,"dupa")
   }
 

@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    data: { breadcrumb: { alias: 'Home' } },
+    data: { breadcrumb: { alias: 'home' } },
     component: VacuumPageComponent,
     children: [
       {
@@ -48,7 +48,8 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        component: UserPageComponent
+        component: UserPageComponent,
+        data: { breadcrumb: { alias: 'user' } },
       },
       {
         path: '**',

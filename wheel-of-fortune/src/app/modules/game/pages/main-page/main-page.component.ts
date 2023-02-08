@@ -12,11 +12,12 @@ export class MainPageComponent {
 
   public userLoggedIn$: Observable<boolean> = EMPTY;
 
-  constructor(private readonly authState: AuthState, private breadcrumbService: BreadcrumbService,) {
+  constructor(private readonly authState: AuthState, 
+    private breadcrumbService: BreadcrumbService,) {
     this.userLoggedIn$ = this.authState.authState$.pipe(map(state => state.loggedIn));
   }
 
   ngOnInit(){
-    this.breadcrumbService.set('@Home', 'Home');
+    this.breadcrumbService.set('@home', 'Strona Główna');
   }
 }

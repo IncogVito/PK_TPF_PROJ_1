@@ -12,7 +12,8 @@ import {SharedModule} from "../shared/shared.module";
 import { VacuumPageComponent } from './pages/vacuum-page/vacuum-page.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { DrawingInProgressComponent } from './pages/drawing-in-progress/drawing-in-progress.component';
-
+import { BreadcrumbModule } from 'xng-breadcrumb';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { DrawingInProgressComponent } from './pages/drawing-in-progress/drawing-
     MatInputModule,
     ReactiveFormsModule,
     SharedModule,
-    RouterOutlet
+    RouterOutlet,
+    BreadcrumbModule,
+    MatIconModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

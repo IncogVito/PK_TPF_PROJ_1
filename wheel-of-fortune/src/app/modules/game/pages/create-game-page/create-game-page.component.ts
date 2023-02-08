@@ -4,6 +4,7 @@ import {Store} from "@ngxs/store";
 import {GameActions} from "../../stores/game/game.actions";
 import CreateNewGame = GameActions.CreateNewGame;
 import {GameFormModel} from "../../model/game-form.model";
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-create-game-page',
@@ -20,7 +21,13 @@ export class CreateGamePageComponent {
   )
   
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store,
+              private breadcrumbService: BreadcrumbService,
+    ) {
+  }
+
+  ngOnInit(){
+    this.breadcrumbService.set('@create', 'Utwórz Losowanie');
   }
 
   createGame() {

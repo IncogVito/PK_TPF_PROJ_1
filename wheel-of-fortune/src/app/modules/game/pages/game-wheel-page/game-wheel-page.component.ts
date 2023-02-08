@@ -46,7 +46,7 @@ export class GameWheelPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.gameState$ = this.gameStateService.gameState$;
-    this.breadcrumbService.set('@game', 'Game');
+    this.breadcrumbService.set('@game', 'Losowanie');
     this.authState$ = this.authState.authState$;
     this.listenChanges();
   }
