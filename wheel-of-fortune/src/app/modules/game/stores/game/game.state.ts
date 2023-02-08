@@ -102,7 +102,9 @@ export class GameState {
     if (!ctx.getState().fetched || ctx.getState().game.id !== action.payload.id) {
       throw new Error("Illegal state exception - different ids between current and updated");
     }
-    const updateParticipantsInCurrentGame = ArrayUtilService.isEmpty(ctx.getState().game.participantsInCurrentGame);
+    const updateParticipantsInCurrentGame = ArrayUtilService.isEmpty(ctx.getState().game.participantsInCurrentGame) ||
+      ArrayUtilService.lengthOf(ctx.getState().game.participants)
+      === ArrayUtilService.lengthOf(ctx.getState().game.participantsInCurrentGame);
 
     ctx.patchState({
       game: {
