@@ -38,6 +38,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {GameModule} from "./modules/game/game.module";
 import { BreadcrumbModule } from "xng-breadcrumb";
+import { UserPageComponent } from './modules/game/pages/user-page/user-page.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { BreadcrumbModule } from "xng-breadcrumb";
     MainPageComponent,
     GameWheelPageComponent,
     JoinGamePageComponent,
-    CreateGamePageComponent
+    CreateGamePageComponent, 
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

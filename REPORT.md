@@ -21,7 +21,6 @@ Cały projekt po wybraniu został podzielony na kilka fragmentów:
 * konfiguracja ze środowiskiem zewnętrznym
 * przeprowadzenie testów aplikacji
 * korekty po testach
-* przeprowadzenie drugiej ankiety z udostępnieniem aplikacji, aby poznać odczucia użytkowników
 * przygotowanie raportu i dokumentacji
 
 ### Wstępne przedstawienie zarysu projektu
@@ -39,7 +38,7 @@ Wywiad został umieszczony w pliku Documents/INTERVIEW.md
 
 ### Przygotowanie zadań 
 Team leader przygotował tablice do projektu, gdzie stworzył i rozdzielił zadania ze względu na członków zespołu oraz ich obowiązki w projekcie. Takie przygotowanie miało za zadanie kontrolować postęp w projekcie. Ostatecznie wsystkie zadania zostały ukończone co możemy zobaczyć na zdjęciu talicy poniżej:
-![plot](tasks.png)
+![plot](Documents/photos/tasks.png)
 
 ### Przygotowanie makiety GUI
 UX designer w oparciu o przeprowadzony wywiad przygotował ostateczny widok aplikacji. Pomogło to zwizualizować wszystkie zawarte pomysły oraz mieć wyobrażenie dotyczące aplikacji.
@@ -65,11 +64,6 @@ Testy odbywały się wewnątrz zespołu. Uznaliśmy, że każdy członek zespoł
 ### Korekty po testach
 Każdy z testerów przygotowywał listę błędów lub potencjalnych optymalizacji w działaniu aplikacji. Podczas wspólnego spotkania podejmowaliśmy decyzję dotyczącą optymalizacji oraz analizy błędów oraz przygotowaniu listy rzeczy do poprawy. Po wprowadzeniu poprawek w kodzie jeszcze raz przetestowaliśmy aplikację tak samo jak w kroku "Testy aplikacji" i po stwierdzeniu, że aplikacja jest gotowa do użytkowania mogliśmy zakończyć część dotyczącą faktycznej pracy z kodem.
 
-### Druga ankieta
-Druga ankieta została przygotowana przez cały zespół. Miała ona na celu zebranie odczuć użytkowników podczas korzystania z aplikacji oraz
-poznania mocnych i słabych stron aplikacji. Oprócz pytań zamkniętych umieściliśmy pytania otwarte, które mogły pozwolić lepiej wyrazić odczucia. Wyniki z ankiety są dobrym wyznacznikiem w jakim kierunku możemy rozwinąć aplikację, aby była bardziej przyjazna dla użtkowników.
-
-Wyniki ankiety znajdują się w Documents/survey_2.pdf
 
 
 ### Przygotowanie sprawozdania z projektu oraz dokumentacji

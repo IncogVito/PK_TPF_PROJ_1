@@ -28,7 +28,7 @@ export class GameUtil {
       type: gameFormModel.type,
       singleGameTime: Number(gameFormModel.singleGameTime),
       drawInProgress: false,
-      chosenParticipant: undefined
+      chosenParticipant: {} as any
     }
   }
 
